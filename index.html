@@ -23,6 +23,7 @@
             padding: 0;
             box-sizing: border-box;
             font-family: 'Poppins', sans-serif;
+            -webkit-tap-highlight-color: transparent;
         }
         
         body {
@@ -32,17 +33,17 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 20px;
+            padding: 0;
+            overflow: hidden;
         }
         
         .app-container {
             width: 100%;
-            max-width: 400px;
-            height: 85vh;
+            max-width: 100%;
+            height: 100vh;
             background: white;
-            border-radius: 24px;
+            border-radius: 0;
             overflow: hidden;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
             display: flex;
             flex-direction: column;
             position: relative;
@@ -53,8 +54,11 @@
             flex-direction: column;
             height: 100%;
             width: 100%;
-            padding: 20px;
+            padding: 0;
             overflow-y: auto;
+            position: absolute;
+            top: 0;
+            left: 0;
         }
         
         .active {
@@ -66,11 +70,10 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 15px 0;
-            position: sticky;
-            top: 0;
+            padding: 15px 20px;
             background: white;
             z-index: 10;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
         
         .logo {
@@ -91,6 +94,14 @@
             cursor: pointer;
         }
         
+        /* Content Area */
+        .content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+            padding-bottom: 80px; /* Space for tab bar */
+        }
+        
         /* Onboarding Styles */
         .onboarding-content {
             text-align: center;
@@ -98,12 +109,12 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
-            padding: 20px 0;
+            padding: 20px;
         }
         
         .onboarding-illustration {
             width: 100%;
-            height: 200px;
+            height: 30vh;
             background: linear-gradient(45deg, #FFE6F1 0%, #E6EEFF 100%);
             border-radius: 16px;
             display: flex;
@@ -113,7 +124,7 @@
         }
         
         .onboarding-illustration i {
-            font-size: 100px;
+            font-size: 80px;
             background: linear-gradient(45deg, var(--primary), var(--secondary));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -130,6 +141,7 @@
             font-size: 16px;
             color: var(--gray);
             margin-bottom: 30px;
+            line-height: 1.5;
         }
         
         /* Button Styles */
@@ -149,9 +161,9 @@
             width: 100%;
         }
         
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(255, 77, 151, 0.3);
+        .btn-primary:active {
+            transform: scale(0.98);
+            box-shadow: 0 5px 15px rgba(255, 77, 151, 0.3);
         }
         
         .btn-outline {
@@ -186,7 +198,8 @@
         
         .profile-image {
             width: 100%;
-            height: 350px;
+            height: 60vh;
+            max-height: 500px;
             object-fit: cover;
         }
         
@@ -262,8 +275,8 @@
             color: white;
         }
         
-        .action-btn:hover {
-            transform: scale(1.1);
+        .action-btn:active {
+            transform: scale(0.95);
         }
         
         /* Tab Bar */
@@ -274,8 +287,10 @@
             padding: 15px 0;
             background: white;
             border-top: 1px solid #f0f0f0;
-            position: sticky;
+            position: fixed;
             bottom: 0;
+            width: 100%;
+            max-width: 100%;
             z-index: 10;
         }
         
@@ -285,6 +300,7 @@
             align-items: center;
             color: var(--gray);
             font-size: 12px;
+            cursor: pointer;
         }
         
         .tab-item.active {
@@ -434,6 +450,7 @@
             color: var(--gray);
             text-align: center;
             margin: 10px 0;
+            line-height: 1.5;
         }
         
         /* Animations */
@@ -450,7 +467,7 @@
         /* Toast Notification */
         .toast {
             position: fixed;
-            bottom: 20px;
+            bottom: 80px;
             left: 50%;
             transform: translateX(-50%);
             background: var(--success);
@@ -503,7 +520,7 @@
             border-radius: 16px;
             overflow: hidden;
             position: relative;
-            height: 250px;
+            height: 180px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
         
@@ -546,6 +563,116 @@
             background: var(--primary);
             border-radius: 12px;
         }
+        
+        /* Search Results */
+        .search-results {
+            margin-top: 15px;
+        }
+        
+        .search-filter {
+            display: flex;
+            gap: 10px;
+            margin: 15px 0;
+            overflow-x: auto;
+            padding-bottom: 5px;
+            -webkit-overflow-scrolling: touch;
+        }
+        
+        .filter-btn {
+            padding: 8px 16px;
+            background: #f8f9fa;
+            border-radius: 20px;
+            border: none;
+            font-size: 14px;
+            white-space: nowrap;
+            cursor: pointer;
+        }
+        
+        .filter-btn.active {
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            color: white;
+        }
+        
+        /* Add Profile Section */
+        .add-profile-section {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 16px;
+            margin: 15px 0;
+            text-align: center;
+        }
+        
+        .add-profile-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 24px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            color: white;
+            border-radius: 50px;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        
+        .add-profile-btn i {
+            margin-right: 8px;
+        }
+        
+        /* Swipe Animation */
+        .swipe-right {
+            transform: translateX(1000px) rotate(30deg);
+            opacity: 0;
+            transition: transform 0.5s ease, opacity 0.5s ease;
+        }
+        
+        .swipe-left {
+            transform: translateX(-1000px) rotate(-30deg);
+            opacity: 0;
+            transition: transform 0.5s ease, opacity 0.5s ease;
+        }
+        
+        /* Mobile-specific optimizations */
+        @media (max-height: 700px) {
+            .profile-image {
+                height: 50vh;
+            }
+            
+            .onboarding-illustration {
+                height: 25vh;
+            }
+        }
+        
+        @media (max-width: 350px) {
+            .header {
+                padding: 10px 15px;
+            }
+            
+            .content {
+                padding: 15px;
+            }
+            
+            .onboarding-title {
+                font-size: 20px;
+            }
+            
+            .profile-name {
+                font-size: 20px;
+            }
+            
+            .action-btn {
+                width: 50px;
+                height: 50px;
+            }
+        }
+        
+        /* Prevent zoom on input focus for mobile */
+        @media (max-width: 480px) {
+            input, select, textarea {
+                font-size: 16px !important;
+            }
+        }
     </style>
 </head>
 <body>
@@ -556,34 +683,36 @@
                 <div class="logo">Your<span>Wish</span></div>
             </div>
             
-            <div class="onboarding-content">
-                <div class="onboarding-illustration">
-                    <i class="fas fa-heart"></i>
+            <div class="content">
+                <div class="onboarding-content">
+                    <div class="onboarding-illustration">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h1 class="onboarding-title">Find Your Vibe, Your Tribe!</h1>
+                    <p class="onboarding-subtitle">Connect with like-minded people and find your perfect match</p>
+                    
+                    <div class="form-group">
+                        <input type="email" class="form-input" placeholder="Email or Phone">
+                    </div>
+                    
+                    <div class="form-group">
+                        <input type="password" class="form-input" placeholder="Password">
+                    </div>
+                    
+                    <div class="form-group">
+                        <button class="btn btn-primary" onclick="showScreen('preferences-screen')">Continue</button>
+                    </div>
+                    
+                    <p class="microcopy">Or continue with social media</p>
+                    
+                    <div style="display: flex; justify-content: center; margin: 15px 0;">
+                        <div class="btn-icon"><i class="fab fa-google"></i></div>
+                        <div class="btn-icon"><i class="fab fa-apple"></i></div>
+                        <div class="btn-icon"><i class="fab fa-instagram"></i></div>
+                    </div>
+                    
+                    <p class="microcopy">By continuing, you agree to our Terms and Privacy Policy</p>
                 </div>
-                <h1 class="onboarding-title">Find Your Vibe, Your Tribe!</h1>
-                <p class="onboarding-subtitle">Connect with like-minded people and find your perfect match</p>
-                
-                <div class="form-group">
-                    <input type="email" class="form-input" placeholder="Email or Phone">
-                </div>
-                
-                <div class="form-group">
-                    <input type="password" class="form-input" placeholder="Password">
-                </div>
-                
-                <div class="form-group">
-                    <button class="btn btn-primary" onclick="showScreen('preferences-screen')">Continue</button>
-                </div>
-                
-                <p class="microcopy">Or continue with social media</p>
-                
-                <div style="display: flex; justify-content: center; margin: 15px 0;">
-                    <div class="btn-icon"><i class="fab fa-google"></i></div>
-                    <div class="btn-icon"><i class="fab fa-apple"></i></div>
-                    <div class="btn-icon"><i class="fab fa-instagram"></i></div>
-                </div>
-                
-                <p class="microcopy">By continuing, you agree to our Terms and Privacy Policy</p>
             </div>
         </div>
         
@@ -595,66 +724,68 @@
                 <div class="nav-icon"><i class="fas fa-question-circle"></i></div>
             </div>
             
-            <h2 class="onboarding-title">Tell us about yourself</h2>
-            <p class="onboarding-subtitle">Help us find your perfect matches</p>
-            
-            <div class="progress-bar">
-                <div class="progress"></div>
-            </div>
-            
-            <div class="form-group">
-                <label class="form-label">I'm looking for</label>
-                <select class="form-input">
-                    <option>Friends</option>
-                    <option>Dating</option>
-                    <option>Serious Relationship</option>
-                    <option>Something casual</option>
-                </select>
-            </div>
-            
-            <div class="form-group">
-                <label class="form-label">Age Range</label>
-                <select class="form-input">
-                    <option>18-21</option>
-                    <option>21-25</option>
-                    <option>25-30</option>
-                </select>
-            </div>
-            
-            <div class="form-group">
-                <label class="form-label">Maximum Distance</label>
-                <select class="form-input">
-                    <option>5 km</option>
-                    <option>10 km</option>
-                    <option>25 km</option>
-                    <option>50 km</option>
-                </select>
-            </div>
-            
-            <div style="display: flex; justify-content: space-between; align-items: center; margin: 20px 0;">
-                <div>
-                    <div class="form-label">Enable Notifications</div>
-                    <p class="microcopy">Get updates on new matches and messages</p>
+            <div class="content">
+                <h2 class="onboarding-title">Tell us about yourself</h2>
+                <p class="onboarding-subtitle">Help us find your perfect matches</p>
+                
+                <div class="progress-bar">
+                    <div class="progress"></div>
                 </div>
-                <label class="toggle-switch">
-                    <input type="checkbox" checked>
-                    <span class="slider"></span>
-                </label>
-            </div>
-            
-            <div style="display: flex; justify-content: space-between; align-items: center; margin: 20px 0;">
-                <div>
-                    <div class="form-label">Private Account</div>
-                    <p class="microcopy">Only matches can see your profile</p>
+                
+                <div class="form-group">
+                    <label class="form-label">I'm looking for</label>
+                    <select class="form-input">
+                        <option>Friends</option>
+                        <option>Dating</option>
+                        <option>Serious Relationship</option>
+                        <option>Something casual</option>
+                    </select>
                 </div>
-                <label class="toggle-switch">
-                    <input type="checkbox">
-                    <span class="slider"></span>
-                </label>
-            </div>
-            
-            <div class="form-group">
-                <button class="btn btn-primary" onclick="showScreen('home-screen')">Complete Profile</button>
+                
+                <div class="form-group">
+                    <label class="form-label">Age Range</label>
+                    <select class="form-input">
+                        <option>18-21</option>
+                        <option>21-25</option>
+                        <option>25-30</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Maximum Distance</label>
+                    <select class="form-input">
+                        <option>5 km</option>
+                        <option>10 km</option>
+                        <option>25 km</option>
+                        <option>50 km</option>
+                    </select>
+                </div>
+                
+                <div style="display: flex; justify-content: space-between; align-items: center; margin: 20px 0;">
+                    <div>
+                        <div class="form-label">Enable Notifications</div>
+                        <p class="microcopy">Get updates on new matches and messages</p>
+                    </div>
+                    <label class="toggle-switch">
+                        <input type="checkbox" checked>
+                        <span class="slider"></span>
+                    </label>
+                </div>
+                
+                <div style="display: flex; justify-content: space-between; align-items: center; margin: 20px 0;">
+                    <div>
+                        <div class="form-label">Private Account</div>
+                        <p class="microcopy">Only matches can see your profile</p>
+                    </div>
+                    <label class="toggle-switch">
+                        <input type="checkbox">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+                
+                <div class="form-group">
+                    <button class="btn btn-primary" onclick="showScreen('home-screen')">Complete Profile</button>
+                </div>
             </div>
         </div>
         
@@ -665,123 +796,91 @@
                 <div class="nav-icon"><i class="fas fa-filter"></i></div>
             </div>
             
-            <h2 class="onboarding-title">Discover People</h2>
-            <p class="onboarding-subtitle">Swipe to like or pass on profiles</p>
-            
-            <div class="profile-card">
-                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&q=80" class="profile-image" alt="Profile">
-                <div class="profile-info">
-                    <h2 class="profile-name">Emma, 22</h2>
-                    <p class="profile-details">📍 5 km away · 🎓 Art Student</p>
-                    <p class="profile-bio">Love painting, indie music, and coffee shops. Looking for someone to explore the city with.</p>
-                    
-                    <div class="badges">
-                        <div class="badge">🎨 Art</div>
-                        <div class="badge">☕ Coffee</div>
-                        <div class="badge">🎵 Indie Music</div>
-                        <div class="badge">📸 Photography</div>
-                    </div>
-                    
-                    <div class="personality-reveal">
-                        <div class="personality-title">My perfect first date:</div>
-                        <div class="personality-answer">Visiting an art exhibition followed by coffee at a cozy café</div>
-                    </div>
-                </div>
+            <div class="content">
+                <h2 class="onboarding-title">Discover People</h2>
+                <p class="onboarding-subtitle">Swipe to like or pass on profiles</p>
                 
-                <div class="profile-actions">
-                    <div class="action-btn dislike-btn" onclick="swipeCard()">
-                        <i class="fas fa-times"></i>
-                    </div>
-                    <div class="action-btn super-like-btn" onclick="swipeCard()">
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <div class="action-btn like-btn" onclick="swipeCard()">
-                        <i class="fas fa-heart"></i>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Additional profiles for scrolling -->
-            <div class="profile-card">
-                <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&q=80" class="profile-image" alt="Profile">
-                <div class="profile-info">
-                    <h2 class="profile-name">Sophia, 23</h2>
-                    <p class="profile-details">📍 7 km away · 🎓 Psychology Major</p>
-                    <p class="profile-bio">Book lover, amateur photographer, and coffee enthusiast. Looking for deep conversations and new adventures.</p>
-                    
-                    <div class="badges">
-                        <div class="badge">📚 Reading</div>
-                        <div class="badge">📸 Photography</div>
-                        <div class="badge">☕ Coffee</div>
-                        <div class="badge">✈️ Travel</div>
+                <div class="profile-card" id="current-profile">
+                    <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&q=80" class="profile-image" alt="Profile">
+                    <div class="profile-info">
+                        <h2 class="profile-name">Emma, 22</h2>
+                        <p class="profile-details">📍 5 km away · 🎓 Art Student</p>
+                        <p class="profile-bio">Love painting, indie music, and coffee shops. Looking for someone to explore the city with.</p>
+                        
+                        <div class="badges">
+                            <div class="badge">🎨 Art</div>
+                            <div class="badge">☕ Coffee</div>
+                            <div class="badge">🎵 Indie Music</div>
+                            <div class="badge">📸 Photography</div>
+                        </div>
+                        
+                        <div class="personality-reveal">
+                            <div class="personality-title">My perfect first date:</div>
+                            <div class="personality-answer">Visiting an art exhibition followed by coffee at a cozy café</div>
+                        </div>
                     </div>
                     
-                    <div class="personality-reveal">
-                        <div class="personality-title">Favorite book:</div>
-                        <div class="personality-answer">The Midnight Library by Matt Haig</div>
-                    </div>
-                </div>
-                
-                <div class="profile-actions">
-                    <div class="action-btn dislike-btn" onclick="swipeCard()">
-                        <i class="fas fa-times"></i>
-                    </div>
-                    <div class="action-btn super-like-btn" onclick="swipeCard()">
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <div class="action-btn like-btn" onclick="swipeCard()">
-                        <i class="fas fa-heart"></i>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Discover Grid -->
-            <h3 style="margin: 20px 0 10px 0;">More People Nearby</h3>
-            <div class="discover-grid">
-                <div class="discover-item">
-                    <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&q=80" alt="Profile">
-                    <div class="discover-info">
-                        <div class="discover-name">Olivia, 21</div>
-                        <div class="discover-details">📍 4 km away · 🎓 Nursing Student</div>
-                        <div class="discover-badges">
-                            <div class="discover-badge">💪 Fitness</div>
-                            <div class="discover-badge">🐶 Dogs</div>
+                    <div class="profile-actions">
+                        <div class="action-btn dislike-btn" onclick="swipeCard('left')">
+                            <i class="fas fa-times"></i>
+                        </div>
+                        <div class="action-btn super-like-btn" onclick="swipeCard('super')">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="action-btn like-btn" onclick="swipeCard('right')">
+                            <i class="fas fa-heart"></i>
                         </div>
                     </div>
                 </div>
                 
-                <div class="discover-item">
-                    <img src="https://images.unsplash.com/photo-1552058544-f2b08422138a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&q=80" alt="Profile">
-                    <div class="discover-info">
-                        <div class="discover-name">Noah, 23</div>
-                        <div class="discover-details">📍 6 km away · 🎓 Graphic Designer</div>
-                        <div class="discover-badges">
-                            <div class="discover-badge">🎨 Design</div>
-                            <div class="discover-badge">🎵 Music</div>
+                <!-- Discover Grid -->
+                <h3 style="margin: 20px 0 10px 0;">More People Nearby</h3>
+                <div class="discover-grid">
+                    <div class="discover-item">
+                        <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&q=80" alt="Profile">
+                        <div class="discover-info">
+                            <div class="discover-name">Olivia, 21</div>
+                            <div class="discover-details">📍 4 km away</div>
+                            <div class="discover-badges">
+                                <div class="discover-badge">💪 Fitness</div>
+                                <div class="discover-badge">🐶 Dogs</div>
+                            </div>
                         </div>
                     </div>
-                </div>
-                
-                <div class="discover-item">
-                    <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&q=80" alt="Profile">
-                    <div class="discover-info">
-                        <div class="discover-name">Liam, 24</div>
-                        <div class="discover-details">📍 3 km away · 💼 Marketing Manager</div>
-                        <div class="discover-badges">
-                            <div class="discover-badge">📊 Marketing</div>
-                            <div class="discover-badge">🏃 Running</div>
+                    
+                    <div class="discover-item">
+                        <img src="https://images.unsplash.com/photo-1552058544-f2b08422138a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&q=80" alt="Profile">
+                        <div class="discover-info">
+                            <div class="discover-name">Noah, 23</div>
+                            <div class="discover-details">📍 6 km away</div>
+                            <div class="discover-badges">
+                                <div class="discover-badge">🎨 Design</div>
+                                <div class="discover-badge">🎵 Music</div>
+                            </div>
                         </div>
                     </div>
-                </div>
-                
-                <div class="discover-item">
-                    <img src="https://images.unsplash.com/photo-1519764622345-23439dd774f7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&q=80" alt="Profile">
-                    <div class="discover-info">
-                        <div class="discover-name">Ava, 22</div>
-                        <div class="discover-details">📍 5 km away · 🎓 Biology Student</div>
-                        <div class="discover-badges">
-                            <div class="discover-badge">🔬 Science</div>
-                            <div class="discover-badge">🎾 Tennis</div>
+                    
+                    <div class="discover-item">
+                        <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&q=80" alt="Profile">
+                        <div class="discover-info">
+                            <div class="discover-name">Liam, 24</div>
+                            <div class="discover-details">📍 3 km away</div>
+                            <div class="discover-badges">
+                                <div class="discover-badge">📊 Marketing</div>
+                                <div class="discover-badge">🏃 Running</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="discover-item">
+                        <img src="https://images.unsplash.com/photo-1519764622345-23439dd774f7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&q=80" alt="Profile">
+                        <div class="discover-info">
+                            <div class="discover-name">Ava, 22</div>
+                            <div class="discover-details">📍 5 km away</div>
+                            <div class="discover-badges">
+                                <div class="discover-badge">🔬 Science</div>
+                                <div class="discover-badge">🎾 Tennis</div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -815,111 +914,90 @@
                 <div class="nav-icon"><i class="fas fa-sliders-h"></i></div>
             </div>
             
-            <!-- Search Bar -->
-            <div class="search-bar">
-                <i class="fas fa-search"></i>
-                <input type="text" placeholder="Search for people, interests...">
-            </div>
-            
-            <h2 class="onboarding-title">Find Your Match</h2>
-            <p class="onboarding-subtitle">Based on your interests and preferences</p>
-            
-            <div class="profile-card">
-                <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&q=80" class="profile-image" alt="Profile">
-                <div class="profile-info">
-                    <h2 class="profile-name">saisaiprasadc, 24</h2>
-                    <p class="profile-details">📍 3 km away · 💻 Software Developer</p>
-                    <p class="profile-bio">Tech enthusiast, gamer, and coffee addict. Love hiking and trying new food spots.</p>
-                    
-                    <div class="badges">
-                        <div class="badge">🎮 Gaming</div>
-                        <div class="badge">💻 Coding</div>
-                        <div class="badge">🍕 Foodie</div>
-                        <div class="badge">🏔️ Hiking</div>
-                    </div>
-                    
-                    <div class="personality-reveal">
-                        <div class="personality-title">Favorite Weekend Activity:</div>
-                        <div class="personality-answer">Gaming marathon with friends or exploring new hiking trails</div>
-                    </div>
+            <div class="content">
+                <!-- Search Bar -->
+                <div class="search-bar">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search for people, interests..." id="search-input" onkeyup="filterProfiles()">
                 </div>
                 
-                <div class="profile-actions">
-                    <div class="action-btn dislike-btn" onclick="swipeCard()">
-                        <i class="fas fa-times"></i>
-                    </div>
-                    <div class="action-btn super-like-btn" onclick="swipeCard()">
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <div class="action-btn like-btn" onclick="swipeCard()">
-                        <i class="fas fa-heart"></i>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Additional profiles for scrolling -->
-            <div class="profile-card">
-                <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&q=80" class="profile-image" alt="Profile">
-                <div class="profile-info">
-                    <h2 class="profile-name">Olivia, 21</h2>
-                    <p class="profile-details">📍 4 km away · 🎓 Nursing Student</p>
-                    <p class="profile-bio">Fitness enthusiast, dog lover, and always up for an adventure. Let's go hiking or try new restaurants!</p>
-                    
-                    <div class="badges">
-                        <div class="badge">💪 Fitness</div>
-                        <div class="badge">🐶 Dogs</div>
-                        <div class="badge">🍣 Foodie</div>
-                        <div class="badge">🏔️ Hiking</div>
-                    </div>
-                    
-                    <div class="personality-reveal">
-                        <div class="personality-title">Perfect day off:</div>
-                        <div class="personality-answer">Morning hike with my dog followed by brunch at a cafe with friends</div>
-                    </div>
+                <!-- Search Filters -->
+                <div class="search-filter">
+                    <button class="filter-btn active" onclick="setFilter('all')">All</button>
+                    <button class="filter-btn" onclick="setFilter('nearby')">Nearby</button>
+                    <button class="filter-btn" onclick="setFilter('recent')">Recent</button>
+                    <button class="filter-btn" onclick="setFilter('popular')">Popular</button>
+                    <button class="filter-btn" onclick="setFilter('verified')">Verified</button>
                 </div>
                 
-                <div class="profile-actions">
-                    <div class="action-btn dislike-btn" onclick="swipeCard()">
-                        <i class="fas fa-times"></i>
-                    </div>
-                    <div class="action-btn super-like-btn" onclick="swipeCard()">
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <div class="action-btn like-btn" onclick="swipeCard()">
-                        <i class="fas fa-heart"></i>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="profile-card">
-                <img src="https://images.unsplash.com/photo-1552058544-f2b08422138a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&q=80" class="profile-image" alt="Profile">
-                <div class="profile-info">
-                    <h2 class="profile-name">Noah, 23</h2>
-                    <p class="profile-details">📍 6 km away · 🎓 Graphic Designer</p>
-                    <p class="profile-bio">Creative soul, music producer, and coffee connoisseur. Let's create something beautiful together.</p>
-                    
-                    <div class="badges">
-                        <div class="badge">🎨 Design</div>
-                        <div class="badge">🎵 Music</div>
-                        <div class="badge">☕ Coffee</div>
-                        <div class="badge">📸 Photography</div>
-                    </div>
-                    
-                    <div class="personality-reveal">
-                        <div class="personality-title">Current obsession:</div>
-                        <div class="personality-answer">Learning to make latte art and producing lo-fi beats</div>
-                    </div>
-                </div>
+                <h2 class="onboarding-title">Find Your Match</h2>
+                <p class="onboarding-subtitle">Based on your interests and preferences</p>
                 
-                <div class="profile-actions">
-                    <div class="action-btn dislike-btn" onclick="swipeCard()">
-                        <i class="fas fa-times"></i>
+                <div class="search-results" id="search-results">
+                    <div class="profile-card">
+                        <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&q=80" class="profile-image" alt="Profile">
+                        <div class="profile-info">
+                            <h2 class="profile-name">Alex, 24</h2>
+                            <p class="profile-details">📍 3 km away · 💻 Software Developer</p>
+                            <p class="profile-bio">Tech enthusiast, gamer, and coffee addict. Love hiking and trying new food spots.</p>
+                            
+                            <div class="badges">
+                                <div class="badge">🎮 Gaming</div>
+                                <div class="badge">💻 Coding</div>
+                                <div class="badge">🍕 Foodie</div>
+                                <div class="badge">🏔️ Hiking</div>
+                            </div>
+                            
+                            <div class="personality-reveal">
+                                <div class="personality-title">Favorite Weekend Activity:</div>
+                                <div class="personality-answer">Gaming marathon with friends or exploring new hiking trails</div>
+                            </div>
+                        </div>
+                        
+                        <div class="profile-actions">
+                            <div class="action-btn dislike-btn" onclick="swipeCard('left')">
+                                <i class="fas fa-times"></i>
+                            </div>
+                            <div class="action-btn super-like-btn" onclick="swipeCard('super')">
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <div class="action-btn like-btn" onclick="swipeCard('right')">
+                                <i class="fas fa-heart"></i>
+                            </div>
+                        </div>
                     </div>
-                    <div class="action-btn super-like-btn" onclick="swipeCard()">
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <div class="action-btn like-btn" onclick="swipeCard()">
-                        <i class="fas fa-heart"></i>
+                    
+                    <div class="profile-card">
+                        <img src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&q=80" class="profile-image" alt="Profile">
+                        <div class="profile-info">
+                            <h2 class="profile-name">James, 25</h2>
+                            <p class="profile-details">📍 8 km away · 🎓 Medical Student</p>
+                            <p class="profile-bio">Future doctor, bookworm, and coffee lover. Looking for someone to share deep conversations and spontaneous adventures with.</p>
+                            
+                            <div class="badges">
+                                <div class="badge">📚 Reading</div>
+                                <div class="badge">🏥 Medicine</div>
+                                <div class="badge">☕ Coffee</div>
+                                <div class="badge">🎾 Tennis</div>
+                            </div>
+                            
+                            <div class="personality-reveal">
+                                <div class="personality-title">Life goal:</div>
+                                <div class="personality-answer">To open a free clinic in underserved communities</div>
+                            </div>
+                        </div>
+                        
+                        <div class="profile-actions">
+                            <div class="action-btn dislike-btn" onclick="swipeCard('left')">
+                                <i class="fas fa-times"></i>
+                            </div>
+                            <div class="action-btn super-like-btn" onclick="swipeCard('super')">
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <div class="action-btn like-btn" onclick="swipeCard('right')">
+                                <i class="fas fa-heart"></i>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -952,53 +1030,62 @@
                 <div class="nav-icon" onclick="toggleEditMode()"><i class="fas fa-edit"></i></div>
             </div>
             
-            <div style="text-align: center; margin: 20px 0;">
-                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&q=80" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover; border: 4px solid white; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
-                <h2 class="profile-name">Emma, 22</h2>
-                <p class="profile-details">🎓 Art Student · 📍 New York</p>
-            </div>
-            
-            <div class="profile-info">
-                <h3 style="margin-bottom: 15px;">About Me</h3>
-                <p class="profile-bio">I'm an art student passionate about painting and photography. Love visiting galleries, indie music concerts, and exploring cute coffee shops. Looking for someone who shares similar interests and wants to explore the city together.</p>
-                
-                <h3 style="margin: 20px 0 10px 0;">Interests</h3>
-                <div class="badges">
-                    <div class="badge">🎨 Painting</div>
-                    <div class="badge">📸 Photography</div>
-                    <div class="badge">☕ Coffee</div>
-                    <div class="badge">🎵 Indie Music</div>
-                    <div class="badge">🎬 Movies</div>
-                    <div class="badge">✈️ Travel</div>
+            <div class="content">
+                <div style="text-align: center; margin: 20px 0;">
+                    <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&q=80" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover; border: 4px solid white; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+                    <h2 class="profile-name">Emma, 22</h2>
+                    <p class="profile-details">🎓 Art Student · 📍 New York</p>
+                    
+                    <div class="add-profile-section">
+                        <p>Want to see how others view your profile?</p>
+                        <button class="add-profile-btn" onclick="showScreen('add-profile-screen')">
+                            <i class="fas fa-plus"></i> Add More Photos
+                        </button>
+                    </div>
                 </div>
                 
-                <h3 style="margin: 20px 0 10px 0;">Personality Traits</h3>
-                <div class="badges">
-                    <div class="badge">Creative</div>
-                    <div class="badge">Adventurous</div>
-                    <div class="badge">Introvert</div>
-                    <div class="badge">Empathetic</div>
-                </div>
-                
-                <div class="personality-reveal" style="margin: 20px 0;">
-                    <div class="personality-title">My perfect first date:</div>
-                    <div class="personality-answer">Visiting an art exhibition followed by coffee at a cozy café</div>
-                </div>
-                
-                <!-- Photo Gallery -->
-                <h3 style="margin: 20px 0 10px 0;">My Photos</h3>
-                <div class="photo-gallery">
-                    <div class="gallery-item">
-                        <img src="https://images.unsplash.com/photo-1541961017774-22349e4a1262?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&q=80" alt="Photo">
+                <div class="profile-info">
+                    <h3 style="margin-bottom: 15px;">About Me</h3>
+                    <p class="profile-bio">I'm an art student passionate about painting and photography. Love visiting galleries, indie music concerts, and exploring cute coffee shops. Looking for someone who shares similar interests and wants to explore the city together.</p>
+                    
+                    <h3 style="margin: 20px 0 10px 0;">Interests</h3>
+                    <div class="badges">
+                        <div class="badge">🎨 Painting</div>
+                        <div class="badge">📸 Photography</div>
+                        <div class="badge">☕ Coffee</div>
+                        <div class="badge">🎵 Indie Music</div>
+                        <div class="badge">🎬 Movies</div>
+                        <div class="badge">✈️ Travel</div>
                     </div>
-                    <div class="gallery-item">
-                        <img src="https://images.unsplash.com/photo-1452587925148-ce544e77e70d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&q=80" alt="Photo">
+                    
+                    <h3 style="margin: 20px 0 10px 0;">Personality Traits</h3>
+                    <div class="badges">
+                        <div class="badge">Creative</div>
+                        <div class="badge">Adventurous</div>
+                        <div class="badge">Introvert</div>
+                        <div class="badge">Empathetic</div>
                     </div>
-                    <div class="gallery-item">
-                        <img src="https://images.unsplash.com/photo-1460661419204-e524d4c775f2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&q=80" alt="Photo">
+                    
+                    <div class="personality-reveal" style="margin: 20px 0;">
+                        <div class="personality-title">My perfect first date:</div>
+                        <div class="personality-answer">Visiting an art exhibition followed by coffee at a cozy café</div>
                     </div>
-                    <div class="gallery-item">
-                        <img src="https://images.unsplash.com/photo-1542435503-956c469947f6?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&q=80" alt="Photo">
+                    
+                    <!-- Photo Gallery -->
+                    <h3 style="margin: 20px 0 10px 0;">My Photos</h3>
+                    <div class="photo-gallery">
+                        <div class="gallery-item">
+                            <img src="https://images.unsplash.com/photo-1541961017774-22349e4a1262?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&q=80" alt="Photo">
+                        </div>
+                        <div class="gallery-item">
+                            <img src="https://images.unsplash.com/photo-1452587925148-ce544e77e70d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&q=80" alt="Photo">
+                        </div>
+                        <div class="gallery-item">
+                            <img src="https://images.unsplash.com/photo-1460661419204-e524d4c775f2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&q=80" alt="Photo">
+                        </div>
+                        <div class="gallery-item">
+                            <img src="https://images.unsplash.com/photo-1542435503-956c469947f6?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&q=80" alt="Photo">
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1023,6 +1110,46 @@
             </div>
         </div>
         
+        <!-- Add Profile Screen -->
+        <div class="screen" id="add-profile-screen">
+            <div class="header">
+                <div class="nav-icon" onclick="showScreen('profile-screen')"><i class="fas fa-arrow-left"></i></div>
+                <div class="logo">Add Photos</div>
+                <div class="nav-icon" onclick="showToast('Photos uploaded successfully!')"><i class="fas fa-check"></i></div>
+            </div>
+            
+            <div class="content">
+                <div class="onboarding-content">
+                    <div class="onboarding-illustration">
+                        <i class="fas fa-images"></i>
+                    </div>
+                    <h1 class="onboarding-title">Add Your Best Photos</h1>
+                    <p class="onboarding-subtitle">Profiles with more photos get 3x more matches</p>
+                    
+                    <div class="photo-gallery" style="margin: 20px 0;">
+                        <div class="gallery-item" style="border: 2px dashed var(--gray); display: flex; justify-content: center; align-items: center;">
+                            <i class="fas fa-plus" style="font-size: 30px; color: var(--gray);"></i>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="https://images.unsplash.com/photo-1541961017774-22349e4a1262?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&q=80" alt="Photo">
+                        </div>
+                        <div class="gallery-item">
+                            <img src="https://images.unsplash.com/photo-1452587925148-ce544e77e70d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&q=80" alt="Photo">
+                        </div>
+                        <div class="gallery-item">
+                            <img src="https://images.unsplash.com/photo-1460661419204-e524d4c775f2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&q=80" alt="Photo">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <button class="btn btn-primary" onclick="showToast('Photos uploaded successfully!'); showScreen('profile-screen');">Upload Photos</button>
+                    </div>
+                    
+                    <p class="microcopy">Tips for great photos: <br> - Use clear, high-quality images <br> - Show yourself in different settings <br> - Include at least one full-body photo</p>
+                </div>
+            </div>
+        </div>
+        
         <!-- Settings Screen -->
         <div class="screen" id="settings-screen">
             <div class="header">
@@ -1031,7 +1158,7 @@
                 <div class="nav-icon" onclick="showToast('Settings saved successfully!')"><i class="fas fa-check"></i></div>
             </div>
             
-            <div style="margin: 20px 0;">
+            <div class="content">
                 <div class="form-group">
                     <label class="form-label">Account</label>
                     <div style="background: #f8f9fa; padding: 15px; border-radius: 16px;">
@@ -1096,78 +1223,12 @@
                 </div>
                 
                 <div class="form-group">
-                    <button class="btn btn-outline" style="color: var(--error);" onclick="alert('Account deleted successfully')">Delete Account</button>
+                    <button class="btn btn-outline" style="color: var(--error);" onclick="confirmDelete()">Delete Account</button>
                 </div>
                 
                 <div class="form-group">
-                    <button class="btn btn-outline" onclick="alert('Logged out successfully'); showScreen('onboarding-screen');">Log Out</button>
+                    <button class="btn btn-outline" onclick="logout()">Log Out</button>
                 </div>
-            </div>
-        </div>
-        
-        <!-- Profile Edit Screen -->
-        <div class="screen" id="edit-profile-screen">
-            <div class="header">
-                <div class="nav-icon" onclick="showScreen('profile-screen')"><i class="fas fa-arrow-left"></i></div>
-                <div class="logo">Edit Profile</div>
-                <div class="nav-icon" onclick="showToast('Profile updated successfully!'); showScreen('profile-screen')"><i class="fas fa-check"></i></div>
-            </div>
-            
-            <div style="text-align: center; margin: 20px 0;">
-                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&q=80" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover; border: 4px solid white; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
-                <div style="margin-top: 10px;">
-                    <button class="btn btn-outline" style="padding: 8px 16px; font-size: 14px;">Change Photo</button>
-                </div>
-            </div>
-            
-            <div class="edit-form">
-                <div class="form-group">
-                    <label class="form-label">Name</label>
-                    <input type="text" class="form-input" value="Emma">
-                </div>
-                
-                <div class="form-group">
-                    <label class="form-label">Age</label>
-                    <input type="number" class="form-input" value="22">
-                </div>
-                
-                <div class="form-group">
-                    <label class="form-label">Bio</label>
-                    <textarea class="form-input" rows="3">I'm an art student passionate about painting and photography. Love visiting galleries, indie music concerts, and exploring cute coffee shops.</textarea>
-                </div>
-                
-                <div class="form-group">
-                    <label class="form-label">Interests (select up to 6)</label>
-                    <div class="badges">
-                        <div class="badge" style="background: var(--primary); color: white;">🎨 Painting</div>
-                        <div class="badge" style="background: var(--primary); color: white;">📸 Photography</div>
-                        <div class="badge" style="background: var(--primary); color: white;">☕ Coffee</div>
-                        <div class="badge">🎵 Indie Music</div>
-                        <div class="badge">🎬 Movies</div>
-                        <div class="badge">✈️ Travel</div>
-                        <div class="badge">📚 Reading</div>
-                        <div class="badge">🎮 Gaming</div>
-                    </div>
-                </div>
-                
-                <div class="form-group">
-                    <label class="form-label">Personality Reveal Question</label>
-                    <select class="form-input">
-                        <option>My perfect first date</option>
-                        <option>Favorite weekend activity</option>
-                        <option>My hidden talent</option>
-                        <option>Life goal</option>
-                    </select>
-                </div>
-                
-                <div class="form-group">
-                    <label class="form-label">Answer</label>
-                    <input type="text" class="form-input" value="Visiting an art exhibition followed by coffee at a cozy café">
-                </div>
-            </div>
-            
-            <div class="form-group">
-                <button class="btn btn-primary" onclick="showToast('Profile updated successfully!'); showScreen('profile-screen')">Save Changes</button>
             </div>
         </div>
     </div>
@@ -1186,21 +1247,33 @@
             document.getElementById(screenId).classList.add('active');
         }
         
-        function swipeCard() {
-            // Simulate card swipe animation
+        function swipeCard(direction) {
             const card = document.querySelector('.profile-card');
-            card.style.transition = 'transform 0.5s ease';
-            card.style.transform = 'translateX(-1000px) rotate(-30deg)';
+            
+            if (direction === 'right') {
+                card.classList.add('swipe-right');
+            } else if (direction === 'left') {
+                card.classList.add('swipe-left');
+            } else {
+                // Super like - different animation
+                card.style.transition = 'transform 0.5s ease, opacity 0.5s ease';
+                card.style.transform = 'translateY(-1000px) rotate(10deg)';
+                card.style.opacity = '0';
+            }
+            
+            // Show a match alert occasionally
+            if (Math.random() > 0.7 && direction !== 'left') {
+                setTimeout(() => {
+                    alert('You have a new match! 💖');
+                }, 500);
+            }
             
             // Reset after animation
             setTimeout(() => {
                 card.style.transition = 'none';
                 card.style.transform = 'translateX(0) rotate(0)';
-                
-                // Show a match alert occasionally
-                if (Math.random() > 0.7) {
-                    alert('You have a new match! 💖');
-                }
+                card.style.opacity = '1';
+                card.classList.remove('swipe-right', 'swipe-left');
             }, 500);
         }
         
@@ -1217,6 +1290,79 @@
         function toggleEditMode() {
             showScreen('edit-profile-screen');
         }
+        
+        function filterProfiles() {
+            const input = document.getElementById('search-input');
+            const filter = input.value.toUpperCase();
+            const profiles = document.querySelectorAll('.profile-card');
+            
+            profiles.forEach(profile => {
+                const name = profile.querySelector('.profile-name').textContent;
+                const bio = profile.querySelector('.profile-bio').textContent;
+                const details = profile.querySelector('.profile-details').textContent;
+                
+                if (name.toUpperCase().indexOf(filter) > -1 || 
+                    bio.toUpperCase().indexOf(filter) > -1 || 
+                    details.toUpperCase().indexOf(filter) > -1) {
+                    profile.style.display = 'block';
+                } else {
+                    profile.style.display = 'none';
+                }
+            });
+        }
+        
+        function setFilter(filterType) {
+            // Remove active class from all filter buttons
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Add active class to clicked button
+            event.target.classList.add('active');
+            
+            // In a real app, this would filter the profiles based on the selected filter
+            showToast(`Filtering by ${filterType}`);
+        }
+        
+        function confirmDelete() {
+            if (confirm('Are you sure you want to delete your account? This action cannot be undone.')) {
+                alert('Account deleted successfully');
+            }
+        }
+        
+        function logout() {
+            if (confirm('Are you sure you want to log out?')) {
+                alert('Logged out successfully');
+                showScreen('onboarding-screen');
+            }
+        }
+        
+        // Add touch events for mobile swiping
+        let touchStartX = 0;
+        let touchStartY = 0;
+        
+        document.addEventListener('touchstart', e => {
+            touchStartX = e.changedTouches[0].screenX;
+            touchStartY = e.changedTouches[0].screenY;
+        });
+        
+        document.addEventListener('touchend', e => {
+            const touchEndX = e.changedTouches[0].screenX;
+            const touchEndY = e.changedTouches[0].screenY;
+            const diffX = touchEndX - touchStartX;
+            const diffY = touchEndY - touchStartY;
+            
+            // Check if it's a horizontal swipe (not vertical scroll)
+            if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 50) {
+                if (diffX > 0) {
+                    // Swipe right - like
+                    swipeCard('right');
+                } else {
+                    // Swipe left - dislike
+                    swipeCard('left');
+                }
+            }
+        });
     </script>
 </body>
 </html>
