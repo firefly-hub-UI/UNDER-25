@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -197,11 +196,52 @@
             position: relative;
         }
         
-        .profile-image {
+        .profile-image-container {
             width: 100%;
             height: 60vh;
             max-height: 500px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .profile-image {
+            width: 100%;
+            height: 100%;
             object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        
+        .profile-image.active {
+            display: block;
+        }
+        
+        .profile-image.inactive {
+            display: none;
+        }
+        
+        .image-indicators {
+            position: absolute;
+            bottom: 15px;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            z-index: 5;
+        }
+        
+        .image-indicator {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            transition: all 0.3s ease;
+        }
+        
+        .image-indicator.active {
+            background: white;
+            width: 20px;
+            border-radius: 4px;
         }
         
         .profile-info {
@@ -634,9 +674,62 @@
             transition: transform 0.5s ease, opacity 0.5s ease;
         }
         
+        /* Match Animation */
+        .match-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+        
+        .match-animation.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+        
+        .match-content {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            max-width: 80%;
+            animation: scaleIn 0.5s ease;
+        }
+        
+        .match-title {
+            font-size: 28px;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        
+        .match-text {
+            margin-bottom: 20px;
+            color: var(--dark);
+        }
+        
+        .match-actions {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+        
+        @keyframes scaleIn {
+            0% { transform: scale(0.8); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        
         /* Mobile-specific optimizations */
         @media (max-height: 700px) {
-            .profile-image {
+            .profile-image-container {
                 height: 50vh;
             }
             
@@ -802,7 +895,16 @@
                 <p class="onboarding-subtitle">Swipe to like or pass on profiles</p>
                 
                 <div class="profile-card" id="current-profile">
-                    <img src="https://media.licdn.com/dms/image/v2/D5603AQETNhgInzhzTQ/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1731682266665?e=1759968000&v=beta&t=O8dUPxY20YiCF0zqW4Guzz8Y7G_mkfom1eO1ZvVdJiw" alt="Profile" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover; border: 4px solid white; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+                    <div class="profile-image-container">
+                        <img src="https://media.licdn.com/dms/image/v2/D5603AQETNhgInzhzTQ/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1731682266665?e=1759968000&v=beta&t=O8dUPxY20YiCF0zqW4Guzz8Y7G_mkfom1eO1ZvVdJiw" alt="Profile" class="profile-image active" data-index="0">
+                        <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&q=80" alt="Profile" class="profile-image inactive" data-index="1">
+                        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&q=80" alt="Profile" class="profile-image inactive" data-index="2">
+                        <div class="image-indicators">
+                            <div class="image-indicator active" data-index="0"></div>
+                            <div class="image-indicator" data-index="1"></div>
+                            <div class="image-indicator" data-index="2"></div>
+                        </div>
+                    </div>
                     <div class="profile-info">
                         <h2 class="profile-name">Rushil Bali, 26</h2>
                         <p class="profile-details">📍 5 km away · 🎓 Participate for Students</p>
@@ -937,7 +1039,16 @@
                 
                 <div class="search-results" id="search-results">
                     <div class="profile-card">
-                        <img src="https://media.licdn.com/dms/image/v2/D5603AQE6yjLFDfxE9g/profile-displayphoto-scale_400_400/B56ZkimhTRJ8Ag-/0/1757222149940?e=1759968000&v=beta&t=biQlFmC_AG66i8sdLAyksX8ZA5d3NPY9HPryWYWT-70" class="profile-image" alt="Profile">
+                        <div class="profile-image-container">
+                            <img src="https://media.licdn.com/dms/image/v2/D5603AQE6yjLFDfxE9g/profile-displayphoto-scale_400_400/B56ZkimhTRJ8Ag-/0/1757222149940?e=1759968000&v=beta&t=biQlFmC_AG66i8sdLAyksX8ZA5d3NPY9HPryWYWT-70" class="profile-image active" alt="Profile" data-index="0">
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&q=80" class="profile-image inactive" alt="Profile" data-index="1">
+                            <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&q=80" class="profile-image inactive" alt="Profile" data-index="2">
+                            <div class="image-indicators">
+                                <div class="image-indicator active" data-index="0"></div>
+                                <div class="image-indicator" data-index="1"></div>
+                                <div class="image-indicator" data-index="2"></div>
+                            </div>
+                        </div>
                         <div class="profile-info">
                             <h2 class="profile-name">Aditya , 20</h2>
                             <p class="profile-details">📍 3 km away · 💻 Software Developer</p>
@@ -970,7 +1081,16 @@
                     </div>
                     
                     <div class="profile-card">
-                        <img src="https://static.vecteezy.com/system/resources/previews/042/332/098/non_2x/default-avatar-profile-icon-grey-photo-placeholder-female-no-photo-images-for-unfilled-user-profile-greyscale-illustration-for-socail-media-web-vector.jpg" class="profile-image" alt="Profile">
+                        <div class="profile-image-container">
+                            <img src="https://static.vecteezy.com/system/resources/previews/042/332/098/non_2x/default-avatar-profile-icon-grey-photo-placeholder-female-no-photo-images-for-unfilled-user-profile-greyscale-illustration-for-socail-media-web-vector.jpg" class="profile-image active" alt="Profile" data-index="0">
+                            <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&q=80" class="profile-image inactive" alt="Profile" data-index="1">
+                            <img src="https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&q=80" class="profile-image inactive" alt="Profile" data-index="2">
+                            <div class="image-indicators">
+                                <div class="image-indicator active" data-index="0"></div>
+                                <div class="image-indicator" data-index="1"></div>
+                                <div class="image-indicator" data-index="2"></div>
+                            </div>
+                        </div>
                         <div class="profile-info">
                             <h2 class="profile-name">Jejeshvini, 25</h2>
                             <p class="profile-details">📍 8 km away · 🎓 Medical Student</p>
@@ -1237,8 +1357,27 @@
 
     <!-- Toast Notification -->
     <div class="toast" id="toast"></div>
+    
+    <!-- Match Animation -->
+    <div class="match-animation" id="match-animation">
+        <div class="match-content">
+            <h2 class="match-title">It's a Match!</h2>
+            <p class="match-text">You and Rushil have liked each other</p>
+            <div class="match-actions">
+                <button class="btn btn-outline" onclick="hideMatchAnimation()">Keep Swiping</button>
+                <button class="btn btn-primary" onclick="hideMatchAnimation()">Say Hello</button>
+            </div>
+        </div>
+    </div>
 
     <script>
+        // Current profile image index for each profile
+        const profileImages = {
+            'current-profile': 0,
+            'explore-profile-1': 0,
+            'explore-profile-2': 0
+        };
+        
         function showScreen(screenId) {
             // Hide all screens
             document.querySelectorAll('.screen').forEach(screen => {
@@ -1249,8 +1388,59 @@
             document.getElementById(screenId).classList.add('active');
         }
         
+        function changeProfileImage(profileId, direction) {
+            const profile = document.getElementById(profileId);
+            if (!profile) return;
+            
+            const images = profile.querySelectorAll('.profile-image');
+            const indicators = profile.querySelectorAll('.image-indicator');
+            
+            if (images.length <= 1) return;
+            
+            // Get current index
+            let currentIndex = profileImages[profileId];
+            
+            // Calculate new index based on direction
+            if (direction === 'next') {
+                currentIndex = (currentIndex + 1) % images.length;
+            } else if (direction === 'prev') {
+                currentIndex = (currentIndex - 1 + images.length) % images.length;
+            }
+            
+            // Update images
+            images.forEach((img, index) => {
+                if (index === currentIndex) {
+                    img.classList.remove('inactive');
+                    img.classList.add('active');
+                } else {
+                    img.classList.remove('active');
+                    img.classList.add('inactive');
+                }
+            });
+            
+            // Update indicators
+            indicators.forEach((indicator, index) => {
+                if (index === currentIndex) {
+                    indicator.classList.add('active');
+                } else {
+                    indicator.classList.remove('active');
+                }
+            });
+            
+            // Save current index
+            profileImages[profileId] = currentIndex;
+        }
+        
         function swipeCard(direction) {
             const card = document.querySelector('.profile-card');
+            const profileId = card.id;
+            
+            // Change photo before swipe animation
+            if (direction === 'right' || direction === 'super') {
+                changeProfileImage(profileId, 'next');
+            } else if (direction === 'left') {
+                changeProfileImage(profileId, 'next');
+            }
             
             if (direction === 'right') {
                 card.classList.add('swipe-right');
@@ -1266,7 +1456,7 @@
             // Show a match alert occasionally
             if (Math.random() > 0.7 && direction !== 'left') {
                 setTimeout(() => {
-                    alert('You have a new match! 💖');
+                    showMatchAnimation();
                 }, 500);
             }
             
@@ -1277,6 +1467,16 @@
                 card.style.opacity = '1';
                 card.classList.remove('swipe-right', 'swipe-left');
             }, 500);
+        }
+        
+        function showMatchAnimation() {
+            const matchAnimation = document.getElementById('match-animation');
+            matchAnimation.classList.add('active');
+        }
+        
+        function hideMatchAnimation() {
+            const matchAnimation = document.getElementById('match-animation');
+            matchAnimation.classList.remove('active');
         }
         
         function showToast(message) {
@@ -1342,20 +1542,24 @@
         // Add touch events for mobile swiping
         let touchStartX = 0;
         let touchStartY = 0;
+        let touchStartTime = 0;
         
         document.addEventListener('touchstart', e => {
             touchStartX = e.changedTouches[0].screenX;
             touchStartY = e.changedTouches[0].screenY;
+            touchStartTime = new Date().getTime();
         });
         
         document.addEventListener('touchend', e => {
             const touchEndX = e.changedTouches[0].screenX;
             const touchEndY = e.changedTouches[0].screenY;
+            const touchEndTime = new Date().getTime();
             const diffX = touchEndX - touchStartX;
             const diffY = touchEndY - touchStartY;
+            const elapsedTime = touchEndTime - touchStartTime;
             
-            // Check if it's a horizontal swipe (not vertical scroll)
-            if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 50) {
+            // Check if it's a horizontal swipe (not vertical scroll) and quick enough
+            if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 50 && elapsedTime < 300) {
                 if (diffX > 0) {
                     // Swipe right - like
                     swipeCard('right');
@@ -1363,6 +1567,56 @@
                     // Swipe left - dislike
                     swipeCard('left');
                 }
+            }
+            
+            // Check for vertical swipe for image changing
+            if (Math.abs(diffY) > Math.abs(diffX) && Math.abs(diffY) > 50 && elapsedTime < 300) {
+                const card = e.target.closest('.profile-card');
+                if (card) {
+                    if (diffY < 0) {
+                        // Swipe up - next image
+                        changeProfileImage(card.id, 'next');
+                    } else {
+                        // Swipe down - previous image
+                        changeProfileImage(card.id, 'prev');
+                    }
+                }
+            }
+        });
+        
+        // Add click events for image indicators
+        document.addEventListener('click', e => {
+            if (e.target.classList.contains('image-indicator')) {
+                const indicator = e.target;
+                const profile = indicator.closest('.profile-card');
+                const profileId = profile.id;
+                const index = parseInt(indicator.getAttribute('data-index'));
+                
+                const images = profile.querySelectorAll('.profile-image');
+                const indicators = profile.querySelectorAll('.image-indicator');
+                
+                // Update images
+                images.forEach((img, imgIndex) => {
+                    if (imgIndex === index) {
+                        img.classList.remove('inactive');
+                        img.classList.add('active');
+                    } else {
+                        img.classList.remove('active');
+                        img.classList.add('inactive');
+                    }
+                });
+                
+                // Update indicators
+                indicators.forEach((ind, indIndex) => {
+                    if (indIndex === index) {
+                        ind.classList.add('active');
+                    } else {
+                        ind.classList.remove('active');
+                    }
+                });
+                
+                // Save current index
+                profileImages[profileId] = index;
             }
         });
     </script>
