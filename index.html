@@ -722,6 +722,188 @@
             gap: 15px;
         }
         
+        /* Chat Styles */
+        .chat-icon {
+            position: relative;
+        }
+        
+        .chat-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: var(--primary);
+            color: white;
+            font-size: 10px;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .chat-container {
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            z-index: 100;
+        }
+        
+        .chat-main-button {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .chat-main-button.active {
+            transform: rotate(45deg);
+        }
+        
+        .chat-window {
+            position: absolute;
+            bottom: 70px;
+            right: 0;
+            width: 300px;
+            height: 400px;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+            display: none;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        
+        .chat-window.active {
+            display: flex;
+        }
+        
+        .chat-header {
+            padding: 15px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .chat-title {
+            font-weight: 600;
+            font-size: 16px;
+        }
+        
+        .chat-close {
+            font-size: 20px;
+            cursor: pointer;
+        }
+        
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .message {
+            max-width: 70%;
+            padding: 10px 15px;
+            border-radius: 18px;
+            margin-bottom: 10px;
+            position: relative;
+        }
+        
+        .message-incoming {
+            background: #f0f0f0;
+            align-self: flex-start;
+            border-bottom-left-radius: 4px;
+        }
+        
+        .message-outgoing {
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            color: white;
+            align-self: flex-end;
+            border-bottom-right-radius: 4px;
+        }
+        
+        .message-time {
+            font-size: 10px;
+            color: var(--gray);
+            margin-top: 5px;
+            text-align: right;
+        }
+        
+        .message-incoming .message-time {
+            color: var(--gray);
+        }
+        
+        .message-outgoing .message-time {
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        .chat-input-container {
+            display: flex;
+            padding: 10px;
+            background: white;
+            border-top: 1px solid #f0f0f0;
+            align-items: center;
+        }
+        
+        .chat-input {
+            flex: 1;
+            border: 1px solid #f0f0f0;
+            border-radius: 24px;
+            padding: 8px 15px;
+            margin-right: 10px;
+            font-size: 14px;
+            outline: none;
+        }
+        
+        .send-button {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: none;
+            cursor: pointer;
+        }
+        
+        /* Selection Options */
+        .selection-options {
+            display: flex;
+            justify-content: center;
+            margin: 15px 0;
+            gap: 10px;
+        }
+        
+        .selection-option {
+            padding: 10px 20px;
+            border-radius: 20px;
+            background: #f8f9fa;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .selection-option.active {
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            color: white;
+        }
+        
         @keyframes scaleIn {
             0% { transform: scale(0.8); opacity: 0; }
             100% { transform: scale(1); opacity: 1; }
@@ -735,6 +917,10 @@
             
             .onboarding-illustration {
                 height: 25vh;
+            }
+            
+            .chat-window {
+                height: 300px;
             }
         }
         
@@ -758,6 +944,11 @@
             .action-btn {
                 width: 50px;
                 height: 50px;
+            }
+            
+            .chat-window {
+                width: 280px;
+                right: -10px;
             }
         }
         
@@ -786,23 +977,23 @@
                     <p class="onboarding-subtitle">Connect with like-minded people and find your perfect match</p>
                     
                     <div class="form-group">
-                        <input type="email" class="form-input" placeholder="Email or Phone">
+                        <input type="email" class="form-input" placeholder="Email or Phone" id="login-email">
                     </div>
                     
                     <div class="form-group">
-                        <input type="password" class="form-input" placeholder="Password">
+                        <input type="password" class="form-input" placeholder="Password" id="login-password">
                     </div>
                     
                     <div class="form-group">
-                        <button class="btn btn-primary" onclick="showScreen('preferences-screen')">Continue</button>
+                        <button class="btn btn-primary" onclick="validateLogin()">Continue</button>
                     </div>
                     
                     <p class="microcopy">Or continue with social media</p>
                     
                     <div style="display: flex; justify-content: center; margin: 15px 0;">
-                        <div class="btn-icon"><i class="fab fa-google"></i></div>
-                        <div class="btn-icon"><i class="fab fa-apple"></i></div>
-                        <div class="btn-icon"><i class="fab fa-instagram"></i></div>
+                        <div class="btn-icon" onclick="socialLogin('google')"><i class="fab fa-google"></i></div>
+                        <div class="btn-icon" onclick="socialLogin('apple')"><i class="fab fa-apple"></i></div>
+                        <div class="btn-icon" onclick="socialLogin('instagram')"><i class="fab fa-instagram"></i></div>
                     </div>
                     
                     <p class="microcopy">By continuing, you agree to our Terms and Privacy Policy</p>
@@ -815,7 +1006,7 @@
             <div class="header">
                 <div class="nav-icon" onclick="showScreen('onboarding-screen')"><i class="fas fa-arrow-left"></i></div>
                 <div class="logo">Your<span>Wish</span></div>
-                <div class="nav-icon"><i class="fas fa-question-circle"></i></div>
+                <div class="nav-icon" onclick="showHelp('preferences')"><i class="fas fa-question-circle"></i></div>
             </div>
             
             <div class="content">
@@ -828,7 +1019,7 @@
                 
                 <div class="form-group">
                     <label class="form-label">I'm looking for</label>
-                    <select class="form-input">
+                    <select class="form-input" id="looking-for">
                         <option>Friends</option>
                         <option>Dating</option>
                         <option>Serious Relationship</option>
@@ -838,7 +1029,7 @@
                 
                 <div class="form-group">
                     <label class="form-label">Age Range</label>
-                    <select class="form-input">
+                    <select class="form-input" id="age-range">
                         <option>18-21</option>
                         <option>21-25</option>
                         <option>25-30</option>
@@ -847,7 +1038,7 @@
                 
                 <div class="form-group">
                     <label class="form-label">Maximum Distance</label>
-                    <select class="form-input">
+                    <select class="form-input" id="max-distance">
                         <option>5 km</option>
                         <option>10 km</option>
                         <option>25 km</option>
@@ -861,7 +1052,7 @@
                         <p class="microcopy">Get updates on new matches and messages</p>
                     </div>
                     <label class="toggle-switch">
-                        <input type="checkbox" checked>
+                        <input type="checkbox" id="notifications-toggle" checked>
                         <span class="slider"></span>
                     </label>
                 </div>
@@ -872,13 +1063,13 @@
                         <p class="microcopy">Only matches can see your profile</p>
                     </div>
                     <label class="toggle-switch">
-                        <input type="checkbox">
+                        <input type="checkbox" id="private-toggle">
                         <span class="slider"></span>
                     </label>
                 </div>
                 
                 <div class="form-group">
-                    <button class="btn btn-primary" onclick="showScreen('home-screen')">Complete Profile</button>
+                    <button class="btn btn-primary" onclick="savePreferences()">Complete Profile</button>
                 </div>
             </div>
         </div>
@@ -887,12 +1078,19 @@
         <div class="screen" id="home-screen">
             <div class="header">
                 <div class="logo">Your<span>Wish</span></div>
-                <div class="nav-icon"><i class="fas fa-filter"></i></div>
+                <div class="nav-icon" onclick="showScreen('settings-screen')"><i class="fas fa-cog"></i></div>
             </div>
             
             <div class="content">
                 <h2 class="onboarding-title">Discover People</h2>
                 <p class="onboarding-subtitle">Swipe to like or pass on profiles</p>
+                
+                <!-- Selection Options -->
+                <div class="selection-options">
+                    <div class="selection-option active" onclick="setSelectionOption('everyone')">Everyone</div>
+                    <div class="selection-option" onclick="setSelectionOption('nearby')">Nearby</div>
+                    <div class="selection-option" onclick="setSelectionOption('popular')">Popular</div>
+                </div>
                 
                 <div class="profile-card" id="current-profile">
                     <div class="profile-image-container">
@@ -940,7 +1138,7 @@
                 <!-- Discover Grid -->
                 <h3 style="margin: 20px 0 10px 0;">More People Nearby</h3>
                 <div class="discover-grid">
-                    <div class="discover-item">
+                    <div class="discover-item" onclick="viewProfile('krishna')">
                         <img src="http://media.licdn.com/dms/image/v2/D4E03AQHWnLgowx_00A/profile-displayphoto-crop_800_800/B4EZgJ_8NQGYAI-/0/1752514415296?e=1759968000&v=beta&t=lL6YUi4_ZPEF9eCQk9t7pSkghshVa4YeVNwMUCU3r0k" alt="Profile">
                         <div class="discover-info">
                             <div class="discover-name">Krishna, 21</div>
@@ -952,8 +1150,8 @@
                         </div>
                     </div>
                     
-                    <div class="discover-item">
-                        <img src="https://media.licdn.com/dms/image/v2/D5603AQE5v-bKBsRSWw/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1725465368627?e=1759968000&v=beta&t=dcUM9hkcJAvLCWqtcSxptIiWgCnvmlLvpLY2CQZesUQ" alt="Profile">
+                    <div class="discover-item" onclick="viewProfile('vakas')">
+                        <img src="https://media.licdn.com/dms/image/v2/D5603AQE5v-bKBsRSWw/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1725465368633?e=1761177600&v=beta&t=FI-xWW8WiyxNARC1sZyjPO1VFKAyfK5Cz40DcjgeNss" alt="Profile">
                         <div class="discover-info">
                             <div class="discover-name">Vakas, 23</div>
                             <div class="discover-details">📍 6 km away</div>
@@ -964,7 +1162,7 @@
                         </div>
                     </div>
                     
-                    <div class="discover-item">
+                    <div class="discover-item" onclick="viewProfile('kota')">
                         <img src="https://media.licdn.com/dms/image/v2/D4E03AQGJ15sVfGfxpw/profile-displayphoto-shrink_800_800/B4EZa5qZraHMAc-/0/1746871623753?e=1759968000&v=beta&t=t2-zS3YEE7VJS_caqojIRKJNo7QRAvZzJ1EC88N5JdE" alt="Profile">
                         <div class="discover-info">
                             <div class="discover-name">Kota, 24</div>
@@ -976,8 +1174,8 @@
                         </div>
                     </div>
                     
-                    <div class="discover-item">
-                        <img src="https://media.licdn.com/dms/image/v2/D4D35AQFatCqe8cSZLw/profile-framedphoto-shrink_800_800/profile-framedphoto-shrink_800_800/0/1730223801181?e=1757829600&v=beta&t=S_DnOPx1RqzNDJQwEZbCl1c8d-zbrygR06rkOa-2kx4" alt="Profile">
+                    <div class="discover-item" onclick="viewProfile('lalith')">
+                        <img src="https://media.licdn.com/dms/image/v2/D4D35AQFatCqe8cSZLw/profile-framedphoto-shrink_400_400/profile-framedphoto-shrink_400_400/0/1730223801181?e=1759042800&v=beta&t=9TaAEi9LgUgqRVvSDpyAofm9axyfmcaBurcafhVRkNM" alt="Profile">
                         <div class="discover-info">
                             <div class="discover-name">Lalith, 22</div>
                             <div class="discover-details">📍 5 km away</div>
@@ -986,6 +1184,41 @@
                                 <div class="discover-badge">🎾 Tennis</div>
                             </div>
                         </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Chat Container (Floating on Home Screen) -->
+            <div class="chat-container">
+                <div class="chat-main-button" onclick="toggleChat()">
+                    <i class="fas fa-comment"></i>
+                </div>
+                <div class="chat-window" id="chat-window">
+                    <div class="chat-header">
+                        <div class="chat-title">Messages</div>
+                        <div class="chat-close" onclick="toggleChat()"><i class="fas fa-times"></i></div>
+                    </div>
+                    <div class="chat-messages" id="chat-messages">
+                        <div class="message message-incoming">
+                            <div class="message-text">Hey there! How's it going?</div>
+                            <div class="message-time">10:20 AM</div>
+                        </div>
+                        
+                        <div class="message message-outgoing">
+                            <div class="message-text">Pretty good! Just finished some work. How about you?</div>
+                            <div class="message-time">10:22 AM</div>
+                        </div>
+                        
+                        <div class="message message-incoming">
+                            <div class="message-text">I'm doing great! Just thinking about that café you mentioned</div>
+                            <div class="message-time">10:23 AM</div>
+                        </div>
+                    </div>
+                    <div class="chat-input-container">
+                        <input type="text" class="chat-input" placeholder="Type a message..." id="message-input">
+                        <button class="send-button" onclick="sendMessage()">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -999,13 +1232,96 @@
                     <div class="tab-icon"><i class="fas fa-search"></i></div>
                     <div>Explore</div>
                 </div>
+                <div class="tab-item" onclick="showScreen('matches-screen')">
+                    <div class="tab-icon"><i class="fas fa-heart"></i></div>
+                    <div>Matches</div>
+                </div>
                 <div class="tab-item" onclick="showScreen('profile-screen')">
                     <div class="tab-icon"><i class="fas fa-user"></i></div>
                     <div>Profile</div>
                 </div>
-                <div class="tab-item" onclick="showScreen('settings-screen')">
-                    <div class="tab-icon"><i class="fas fa-cog"></i></div>
-                    <div>Settings</div>
+            </div>
+        </div>
+        
+        <!-- Matches Screen -->
+        <div class="screen" id="matches-screen">
+            <div class="header">
+                <div class="nav-icon" onclick="showScreen('home-screen')"><i class="fas fa-arrow-left"></i></div>
+                <div class="logo">Your Matches</div>
+                <div class="nav-icon"><i class="fas fa-filter"></i></div>
+            </div>
+            
+            <div class="content">
+                <h2 class="onboarding-title">Your Connections</h2>
+                <p class="onboarding-subtitle">People you've matched with</p>
+                
+                <div class="discover-grid">
+                    <div class="discover-item" onclick="openChat('rushil')">
+                        <img src="https://media.licdn.com/dms/image/v2/D5603AQETNhgInzhzTQ/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1731682266665?e=1759968000&v=beta&t=O8dUPxY20YiCF0zqW4Guzz8Y7G_mkfom1eO1ZvVdJiw" alt="Rushil">
+                        <div class="discover-info">
+                            <div class="discover-name">Rushil, 22</div>
+                            <div class="discover-details">📍 5 km away</div>
+                            <div class="discover-badges">
+                                <div class="discover-badge">🎨 Art</div>
+                                <div class="discover-badge">☕ Coffee</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="discover-item" onclick="openChat('krishna')">
+                        <img src="http://media.licdn.com/dms/image/v2/D4E03AQHWnLgowx_00A/profile-displayphoto-crop_800_800/B4EZgJ_8NQGYAI-/0/1752514415296?e=1759968000&v=beta&t=lL6YUi4_ZPEF9eCQk9t7pSkghshVa4YeVNwMUCU3r0k" alt="Krishna">
+                        <div class="discover-info">
+                            <div class="discover-name">Krishna, 21</div>
+                            <div class="discover-details">📍 4 km away</div>
+                            <div class="discover-badges">
+                                <div class="discover-badge">💪 Fitness</div>
+                                <div class="discover-badge">🐶 Dogs</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="discover-item" onclick="openChat('aditya')">
+                        <img src="https://media.licdn.com/dms/image/v2/D5603AQE6yjLFDfxE9g/profile-displayphoto-scale_400_400/B56ZkimhTRJ8Ag-/0/1757222149940?e=1759968000&v=beta&t=biQlFmC_AG66i8sdLAyksX8ZA5d3NPY9HPryWYWT-70" alt="Aditya">
+                        <div class="discover-info">
+                            <div class="discover-name">Aditya, 20</div>
+                            <div class="discover-details">📍 3 km away</div>
+                            <div class="discover-badges">
+                                <div class="discover-badge">🎮 Gaming</div>
+                                <div class="discover-badge">💻 Coding</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="discover-item" onclick="openChat('jejeshvini')">
+                        <img src="https://static.vecteezy.com/system/resources/previews/042/332/098/non_2x/default-avatar-profile-icon-grey-photo-placeholder-female-no-photo-images-for-unfilled-user-profile-greyscale-illustration-for-socail-media-web-vector.jpg" alt="Jejeshvini">
+                        <div class="discover-info">
+                            <div class="discover-name">Jejeshvini, 25</div>
+                            <div class="discover-details">📍 8 km away</div>
+                            <div class="discover-badges">
+                                <div class="discover-badge">📚 Reading</div>
+                                <div class="discover-badge">🏥 Medicine</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="tab-bar">
+                <div class="tab-item" onclick="showScreen('home-screen')">
+                    <div class="tab-icon"><i class="fas fa-compass"></i></div>
+                    <div>Discover</div>
+                </div>
+                <div class="tab-item" onclick="showScreen('explore-screen')">
+                    <div class="tab-icon"><i class="fas fa-search"></i></div>
+                    <div>Explore</div>
+                </div>
+                <div class="tab-item active">
+                    <div class="tab-icon"><i class="fas fa-heart"></i></div>
+                    <div>Matches</div>
+                </div>
+                <div class="tab-item" onclick="showScreen('profile-screen')">
+                    <div class="tab-icon"><i class="fas fa-user"></i></div>
+                    <div>Profile</div>
                 </div>
             </div>
         </div>
@@ -1015,7 +1331,7 @@
             <div class="header">
                 <div class="nav-icon" onclick="showScreen('home-screen')"><i class="fas fa-arrow-left"></i></div>
                 <div class="logo">Explore</div>
-                <div class="nav-icon"><i class="fas fa-sliders-h"></i></div>
+                <div class="nav-icon" onclick="showFilters()"><i class="fas fa-sliders-h"></i></div>
             </div>
             
             <div class="content">
@@ -1038,7 +1354,7 @@
                 <p class="onboarding-subtitle">Based on your interests and preferences</p>
                 
                 <div class="search-results" id="search-results">
-                    <div class="profile-card">
+                    <div class="profile-card" id="explore-profile-1">
                         <div class="profile-image-container">
                             <img src="https://media.licdn.com/dms/image/v2/D5603AQE6yjLFDfxE9g/profile-displayphoto-scale_400_400/B56ZkimhTRJ8Ag-/0/1757222149940?e=1759968000&v=beta&t=biQlFmC_AG66i8sdLAyksX8ZA5d3NPY9HPryWYWT-70" class="profile-image active" alt="Profile" data-index="0">
                             <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&q=80" class="profile-image inactive" alt="Profile" data-index="1">
@@ -1068,19 +1384,19 @@
                         </div>
                         
                         <div class="profile-actions">
-                            <div class="action-btn dislike-btn" onclick="swipeCard('left')">
+                            <div class="action-btn dislike-btn" onclick="swipeCard('left', 'explore-profile-1')">
                                 <i class="fas fa-times"></i>
                             </div>
-                            <div class="action-btn super-like-btn" onclick="swipeCard('super')">
+                            <div class="action-btn super-like-btn" onclick="swipeCard('super', 'explore-profile-1')">
                                 <i class="fas fa-star"></i>
                             </div>
-                            <div class="action-btn like-btn" onclick="swipeCard('right')">
+                            <div class="action-btn like-btn" onclick="swipeCard('right', 'explore-profile-1')">
                                 <i class="fas fa-heart"></i>
                             </div>
                         </div>
                     </div>
                     
-                    <div class="profile-card">
+                    <div class="profile-card" id="explore-profile-2">
                         <div class="profile-image-container">
                             <img src="https://static.vecteezy.com/system/resources/previews/042/332/098/non_2x/default-avatar-profile-icon-grey-photo-placeholder-female-no-photo-images-for-unfilled-user-profile-greyscale-illustration-for-socail-media-web-vector.jpg" class="profile-image active" alt="Profile" data-index="0">
                             <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&q=80" class="profile-image inactive" alt="Profile" data-index="1">
@@ -1110,13 +1426,13 @@
                         </div>
                         
                         <div class="profile-actions">
-                            <div class="action-btn dislike-btn" onclick="swipeCard('left')">
+                            <div class="action-btn dislike-btn" onclick="swipeCard('left', 'explore-profile-2')">
                                 <i class="fas fa-times"></i>
                             </div>
-                            <div class="action-btn super-like-btn" onclick="swipeCard('super')">
+                            <div class="action-btn super-like-btn" onclick="swipeCard('super', 'explore-profile-2')">
                                 <i class="fas fa-star"></i>
                             </div>
-                            <div class="action-btn like-btn" onclick="swipeCard('right')">
+                            <div class="action-btn like-btn" onclick="swipeCard('right', 'explore-profile-2')">
                                 <i class="fas fa-heart"></i>
                             </div>
                         </div>
@@ -1133,13 +1449,13 @@
                     <div class="tab-icon"><i class="fas fa-search"></i></div>
                     <div>Explore</div>
                 </div>
+                <div class="tab-item" onclick="showScreen('matches-screen')">
+                    <div class="tab-icon"><i class="fas fa-heart"></i></div>
+                    <div>Matches</div>
+                </div>
                 <div class="tab-item" onclick="showScreen('profile-screen')">
                     <div class="tab-icon"><i class="fas fa-user"></i></div>
                     <div>Profile</div>
-                </div>
-                <div class="tab-item" onclick="showScreen('settings-screen')">
-                    <div class="tab-icon"><i class="fas fa-cog"></i></div>
-                    <div>Settings</div>
                 </div>
             </div>
         </div>
@@ -1221,13 +1537,13 @@
                     <div class="tab-icon"><i class="fas fa-search"></i></div>
                     <div>Explore</div>
                 </div>
+                <div class="tab-item" onclick="showScreen('matches-screen')">
+                    <div class="tab-icon"><i class="fas fa-heart"></i></div>
+                    <div>Matches</div>
+                </div>
                 <div class="tab-item active">
                     <div class="tab-icon"><i class="fas fa-user"></i></div>
                     <div>Profile</div>
-                </div>
-                <div class="tab-item" onclick="showScreen('settings-screen')">
-                    <div class="tab-icon"><i class="fas fa-cog"></i></div>
-                    <div>Settings</div>
                 </div>
             </div>
         </div>
@@ -1284,15 +1600,15 @@
                 <div class="form-group">
                     <label class="form-label">Account</label>
                     <div style="background: #f8f9fa; padding: 15px; border-radius: 16px;">
-                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; cursor: pointer;" onclick="showScreen('edit-profile-screen')">
                             <div>Edit Profile</div>
                             <i class="fas fa-chevron-right" style="color: var(--gray);"></i>
                         </div>
-                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; cursor: pointer;" onclick="showScreen('privacy-screen')">
                             <div>Privacy & Security</div>
                             <i class="fas fa-chevron-right" style="color: var(--gray);"></i>
                         </div>
-                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; cursor: pointer;" onclick="showScreen('connected-accounts-screen')">
                             <div>Connected Accounts</div>
                             <i class="fas fa-chevron-right" style="color: var(--gray);"></i>
                         </div>
@@ -1305,21 +1621,21 @@
                         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
                             <div>Push Notifications</div>
                             <label class="toggle-switch">
-                                <input type="checkbox" checked>
+                                <input type="checkbox" id="push-notifications" checked>
                                 <span class="slider"></span>
                             </label>
                         </div>
                         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
                             <div>Email Notifications</div>
                             <label class="toggle-switch">
-                                <input type="checkbox" checked>
+                                <input type="checkbox" id="email-notifications" checked>
                                 <span class="slider"></span>
                             </label>
                         </div>
                         <div style="display: flex; justify-content: space-between; align-items: center;">
                             <div>SMS Notifications</div>
                             <label class="toggle-switch">
-                                <input type="checkbox">
+                                <input type="checkbox" id="sms-notifications">
                                 <span class="slider"></span>
                             </label>
                         </div>
@@ -1329,15 +1645,15 @@
                 <div class="form-group">
                     <label class="form-label">Support</label>
                     <div style="background: #f8f9fa; padding: 15px; border-radius: 16px;">
-                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; cursor: pointer;" onclick="showHelp('general')">
                             <div>Get Help</div>
                             <i class="fas fa-chevron-right" style="color: var(--gray);"></i>
                         </div>
-                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; cursor: pointer;" onclick="reportProblem()">
                             <div>Report a Problem</div>
                             <i class="fas fa-chevron-right" style="color: var(--gray);"></i>
                         </div>
-                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; cursor: pointer;" onclick="showScreen('blocked-users-screen')">
                             <div>Blocked Users</div>
                             <i class="fas fa-chevron-right" style="color: var(--gray);"></i>
                         </div>
@@ -1365,7 +1681,7 @@
             <p class="match-text">You and Rushil have liked each other</p>
             <div class="match-actions">
                 <button class="btn btn-outline" onclick="hideMatchAnimation()">Keep Swiping</button>
-                <button class="btn btn-primary" onclick="hideMatchAnimation()">Say Hello</button>
+                <button class="btn btn-primary" onclick="startChat()">Say Hello</button>
             </div>
         </div>
     </div>
@@ -1378,6 +1694,10 @@
             'explore-profile-2': 0
         };
         
+        // Current chat state
+        let currentChatUser = null;
+        let chatOpen = false;
+        
         function showScreen(screenId) {
             // Hide all screens
             document.querySelectorAll('.screen').forEach(screen => {
@@ -1386,6 +1706,63 @@
             
             // Show the requested screen
             document.getElementById(screenId).classList.add('active');
+            
+            // Close chat if open when switching screens
+            if (chatOpen) {
+                toggleChat();
+            }
+        }
+        
+        function validateLogin() {
+            const email = document.getElementById('login-email').value;
+            const password = document.getElementById('login-password').value;
+            
+            if (!email || !password) {
+                showToast('Please enter both email and password');
+                return;
+            }
+            
+            showScreen('preferences-screen');
+        }
+        
+        function socialLogin(provider) {
+            showToast(`Logging in with ${provider}`);
+            // Simulate login process
+            setTimeout(() => {
+                showScreen('preferences-screen');
+            }, 1000);
+        }
+        
+        function savePreferences() {
+            const lookingFor = document.getElementById('looking-for').value;
+            const ageRange = document.getElementById('age-range').value;
+            const maxDistance = document.getElementById('max-distance').value;
+            const notifications = document.getElementById('notifications-toggle').checked;
+            const privateAccount = document.getElementById('private-toggle').checked;
+            
+            showToast('Preferences saved!');
+            showScreen('home-screen');
+        }
+        
+        function showHelp(topic) {
+            showToast(`Help for ${topic} would be shown here`);
+        }
+        
+        function showFilters() {
+            showToast('Advanced filters would be shown here');
+        }
+        
+        function setSelectionOption(option) {
+            // Remove active class from all options
+            document.querySelectorAll('.selection-option').forEach(opt => {
+                opt.classList.remove('active');
+            });
+            
+            // Add active class to clicked option
+            event.target.classList.add('active');
+            
+            // In a real app, this would filter the profiles based on the selected option
+            showToast(`Showing ${option}`);
         }
         
         function changeProfileImage(profileId, direction) {
@@ -1431,16 +1808,11 @@
             profileImages[profileId] = currentIndex;
         }
         
-        function swipeCard(direction) {
-            const card = document.querySelector('.profile-card');
-            const profileId = card.id;
+        function swipeCard(direction, profileId = 'current-profile') {
+            const card = document.getElementById(profileId);
             
             // Change photo before swipe animation
-            if (direction === 'right' || direction === 'super') {
-                changeProfileImage(profileId, 'next');
-            } else if (direction === 'left') {
-                changeProfileImage(profileId, 'next');
-            }
+            changeProfileImage(profileId, 'next');
             
             if (direction === 'right') {
                 card.classList.add('swipe-right');
@@ -1479,6 +1851,113 @@
             matchAnimation.classList.remove('active');
         }
         
+        function startChat() {
+            hideMatchAnimation();
+            toggleChat();
+        }
+        
+        function toggleChat() {
+            const chatButton = document.querySelector('.chat-main-button');
+            const chatWindow = document.getElementById('chat-window');
+            
+            chatOpen = !chatOpen;
+            
+            if (chatOpen) {
+                chatButton.classList.add('active');
+                chatWindow.classList.add('active');
+            } else {
+                chatButton.classList.remove('active');
+                chatWindow.classList.remove('active');
+            }
+        }
+        
+        function openChat(user) {
+            currentChatUser = user;
+            showScreen('home-screen');
+            
+            // Open chat after a short delay to allow screen transition
+            setTimeout(() => {
+                if (!chatOpen) {
+                    toggleChat();
+                }
+            }, 100);
+        }
+        
+        function sendMessage() {
+            const input = document.getElementById('message-input');
+            const message = input.value.trim();
+            
+            if (!message) return;
+            
+            const messagesContainer = document.getElementById('chat-messages');
+            
+            // Create new message element
+            const messageElement = document.createElement('div');
+            messageElement.className = 'message message-outgoing';
+            
+            const messageText = document.createElement('div');
+            messageText.className = 'message-text';
+            messageText.textContent = message;
+            
+            const messageTime = document.createElement('div');
+            messageTime.className = 'message-time';
+            messageTime.textContent = getCurrentTime();
+            
+            messageElement.appendChild(messageText);
+            messageElement.appendChild(messageTime);
+            
+            messagesContainer.appendChild(messageElement);
+            
+            // Clear input
+            input.value = '';
+            
+            // Scroll to bottom
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+            
+            // Simulate reply after a short delay
+            setTimeout(() => {
+                simulateReply();
+            }, 1000);
+        }
+        
+        function simulateReply() {
+            const messagesContainer = document.getElementById('chat-messages');
+            const replies = [
+                "That sounds great!",
+                "I'd love to!",
+                "How about tomorrow?",
+                "Thanks for letting me know!",
+                "I was thinking the same thing!"
+            ];
+            
+            const randomReply = replies[Math.floor(Math.random() * replies.length)];
+            
+            // Create reply message element
+            const messageElement = document.createElement('div');
+            messageElement.className = 'message message-incoming';
+            
+            const messageText = document.createElement('div');
+            messageText.className = 'message-text';
+            messageText.textContent = randomReply;
+            
+            const messageTime = document.createElement('div');
+            messageTime.className = 'message-time';
+            messageTime.textContent = getCurrentTime();
+            
+            messageElement.appendChild(messageText);
+            messageElement.appendChild(messageTime);
+            
+            messagesContainer.appendChild(messageElement);
+            
+            // Scroll to bottom
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+        
+        function getCurrentTime() {
+            const now = new Date();
+            return now.getHours() + ':' + (now.getMinutes() < 10 ? '0' : '') + now.getMinutes();
+        }
+        
         function showToast(message) {
             const toast = document.getElementById('toast');
             toast.textContent = message;
@@ -1491,6 +1970,12 @@
         
         function toggleEditMode() {
             showScreen('edit-profile-screen');
+        }
+        
+        function viewProfile(userId) {
+            showToast(`Viewing ${userId}'s profile`);
+            // In a real app, this would show the profile of the selected user
+            showScreen('profile-screen');
         }
         
         function filterProfiles() {
@@ -1526,16 +2011,25 @@
             showToast(`Filtering by ${filterType}`);
         }
         
+        function reportProblem() {
+            showToast('Problem reporting screen would open here');
+        }
+        
         function confirmDelete() {
             if (confirm('Are you sure you want to delete your account? This action cannot be undone.')) {
-                alert('Account deleted successfully');
+                showToast('Account deleted successfully');
+                setTimeout(() => {
+                    showScreen('onboarding-screen');
+                }, 2000);
             }
         }
         
         function logout() {
             if (confirm('Are you sure you want to log out?')) {
-                alert('Logged out successfully');
-                showScreen('onboarding-screen');
+                showToast('Logged out successfully');
+                setTimeout(() => {
+                    showScreen('onboarding-screen');
+                }, 1500);
             }
         }
         
