@@ -59,10 +59,15 @@
             position: absolute;
             top: 0;
             left: 0;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            opacity: 0;
+            transform: translateY(10px);
         }
         
         .active {
             display: flex;
+            opacity: 1;
+            transform: translateY(0);
         }
         
         /* Header Styles */
@@ -92,6 +97,11 @@
             font-size: 24px;
             color: var(--gray);
             cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+        
+        .nav-icon:active {
+            transform: scale(0.9);
         }
         
         /* Content Area */
@@ -100,6 +110,7 @@
             overflow-y: auto;
             padding: 20px;
             padding-bottom: 80px; /* Space for tab bar */
+            -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
         }
         
         /* Onboarding Styles */
@@ -153,6 +164,37 @@
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn:after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 5px;
+            height: 5px;
+            background: rgba(255, 255, 255, 0.5);
+            opacity: 0;
+            border-radius: 100%;
+            transform: scale(1, 1) translate(-50%);
+            transform-origin: 50% 50%;
+        }
+        
+        .btn:focus:not(:active)::after {
+            animation: ripple 1s ease-out;
+        }
+        
+        @keyframes ripple {
+            0% {
+                transform: scale(0, 0);
+                opacity: 0.5;
+            }
+            100% {
+                transform: scale(20, 20);
+                opacity: 0;
+            }
         }
         
         .btn-primary {
@@ -184,6 +226,12 @@
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
             font-size: 20px;
             margin: 0 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-icon:active {
+            transform: scale(0.9);
         }
         
         /* Profile Card Styles */
@@ -194,6 +242,7 @@
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
             margin: 20px 0;
             position: relative;
+            transition: transform 0.3s ease;
         }
         
         .profile-image-container {
@@ -202,6 +251,7 @@
             max-height: 500px;
             position: relative;
             overflow: hidden;
+            touch-action: pan-y;
         }
         
         .profile-image {
@@ -209,14 +259,15 @@
             height: 100%;
             object-fit: cover;
             transition: transform 0.3s ease;
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            transition: opacity 0.3s ease;
         }
         
         .profile-image.active {
-            display: block;
-        }
-        
-        .profile-image.inactive {
-            display: none;
+            opacity: 1;
         }
         
         .image-indicators {
@@ -236,6 +287,7 @@
             border-radius: 50%;
             background: rgba(255, 255, 255, 0.5);
             transition: all 0.3s ease;
+            cursor: pointer;
         }
         
         .image-indicator.active {
@@ -342,6 +394,7 @@
             color: var(--gray);
             font-size: 12px;
             cursor: pointer;
+            transition: color 0.3s ease;
         }
         
         .tab-item.active {
@@ -351,6 +404,11 @@
         .tab-icon {
             font-size: 24px;
             margin-bottom: 5px;
+            transition: transform 0.3s ease;
+        }
+        
+        .tab-item:active .tab-icon {
+            transform: scale(0.9);
         }
         
         /* Form Elements */
@@ -518,6 +576,7 @@
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
             z-index: 1000;
             display: none;
+            transition: opacity 0.3s ease;
         }
         
         /* Photo Gallery */
@@ -533,6 +592,7 @@
             border-radius: 12px;
             overflow: hidden;
             position: relative;
+            cursor: pointer;
         }
         
         .gallery-item img {
@@ -563,6 +623,12 @@
             position: relative;
             height: 180px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        
+        .discover-item:active {
+            transform: scale(0.98);
         }
         
         .discover-item img {
@@ -627,11 +693,16 @@
             font-size: 14px;
             white-space: nowrap;
             cursor: pointer;
+            transition: all 0.3s ease;
         }
         
         .filter-btn.active {
             background: linear-gradient(90deg, var(--primary), var(--secondary));
             color: white;
+        }
+        
+        .filter-btn:active {
+            transform: scale(0.95);
         }
         
         /* Add Profile Section */
@@ -655,6 +726,11 @@
             font-weight: 600;
             cursor: pointer;
             margin-top: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .add-profile-btn:active {
+            transform: scale(0.95);
         }
         
         .add-profile-btn i {
@@ -770,6 +846,10 @@
             transform: rotate(45deg);
         }
         
+        .chat-main-button:active {
+            transform: scale(0.95);
+        }
+        
         .chat-window {
             position: absolute;
             bottom: 70px;
@@ -782,10 +862,15 @@
             display: none;
             flex-direction: column;
             overflow: hidden;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            opacity: 0;
+            transform: translateY(10px);
         }
         
         .chat-window.active {
             display: flex;
+            opacity: 1;
+            transform: translateY(0);
         }
         
         .chat-header {
@@ -805,6 +890,11 @@
         .chat-close {
             font-size: 20px;
             cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+        
+        .chat-close:active {
+            transform: scale(0.9);
         }
         
         .chat-messages {
@@ -813,6 +903,7 @@
             padding: 15px;
             display: flex;
             flex-direction: column;
+            -webkit-overflow-scrolling: touch;
         }
         
         .message {
@@ -821,6 +912,18 @@
             border-radius: 18px;
             margin-bottom: 10px;
             position: relative;
+            animation: messageSlide 0.3s ease;
+        }
+        
+        @keyframes messageSlide {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
         
         .message-incoming {
@@ -880,6 +983,11 @@
             align-items: center;
             border: none;
             cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+        
+        .send-button:active {
+            transform: scale(0.9);
         }
         
         /* Selection Options */
@@ -902,6 +1010,10 @@
         .selection-option.active {
             background: linear-gradient(90deg, var(--primary), var(--secondary));
             color: white;
+        }
+        
+        .selection-option:active {
+            transform: scale(0.95);
         }
         
         @keyframes scaleIn {
@@ -957,6 +1069,76 @@
             input, select, textarea {
                 font-size: 16px !important;
             }
+        }
+        
+        /* Loading Spinner */
+        .spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        /* Settings Menu Items */
+        .menu-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid #f0f0f0;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+        
+        .menu-item:last-child {
+            border-bottom: none;
+        }
+        
+        .menu-item:active {
+            background-color: #f8f9fa;
+        }
+        
+        .menu-item i {
+            color: var(--gray);
+        }
+        
+        /* Edit Profile Screen */
+        .edit-profile-form {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 16px;
+            margin: 15px 0;
+        }
+        
+        .avatar-upload {
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        .avatar-preview {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 15px;
+            border: 4px solid white;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .avatar-upload-btn {
+            display: inline-block;
+            padding: 8px 16px;
+            background: var(--light);
+            border-radius: 20px;
+            font-size: 14px;
+            cursor: pointer;
         }
     </style>
 </head>
@@ -1087,16 +1269,16 @@
                 
                 <!-- Selection Options -->
                 <div class="selection-options">
-                    <div class="selection-option active" onclick="setSelectionOption('everyone')">Everyone</div>
-                    <div class="selection-option" onclick="setSelectionOption('nearby')">Nearby</div>
-                    <div class="selection-option" onclick="setSelectionOption('popular')">Popular</div>
+                    <div class="selection-option active" onclick="setSelectionOption(this, 'everyone')">Everyone</div>
+                    <div class="selection-option" onclick="setSelectionOption(this, 'nearby')">Nearby</div>
+                    <div class="selection-option" onclick="setSelectionOption(this, 'popular')">Popular</div>
                 </div>
                 
                 <div class="profile-card" id="current-profile">
                     <div class="profile-image-container">
                         <img src="https://media.licdn.com/dms/image/v2/D5603AQETNhgInzhzTQ/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1731682266665?e=1759968000&v=beta&t=O8dUPxY20YiCF0zqW4Guzz8Y7G_mkfom1eO1ZvVdJiw" alt="Profile" class="profile-image active" data-index="0">
-                        <img src="https://under25storage.blr1.cdn.digitaloceanspaces.com/images/Rushil.2e16d0ba.fill-500x500.png" alt="Profile" class="profile-image inactive" data-index="1">
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTNUKm86X1RpvkW4bi4Ic0VWPMO5Y8UD6Oaww&s" alt="Profile" class="profile-image inactive" data-index="2">
+                        <img src="https://under25storage.blr1.cdn.digitaloceanspaces.com/images/Rushil.2e16d0ba.fill-500x500.png" alt="Profile" class="profile-image" data-index="1">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTNUKm86X1RpvkW4bi4Ic0VWPMO5Y8UD6Oaww&s" alt="Profile" class="profile-image" data-index="2">
                         <div class="image-indicators">
                             <div class="image-indicator active" data-index="0"></div>
                             <div class="image-indicator" data-index="1"></div>
@@ -1215,7 +1397,7 @@
                         </div>
                     </div>
                     <div class="chat-input-container">
-                        <input type="text" class="chat-input" placeholder="Type a message..." id="message-input">
+                        <input type="text" class="chat-input" placeholder="Type a message..." id="message-input" onkeypress="handleMessageKeypress(event)">
                         <button class="send-button" onclick="sendMessage()">
                             <i class="fas fa-paper-plane"></i>
                         </button>
@@ -1224,19 +1406,19 @@
             </div>
             
             <div class="tab-bar">
-                <div class="tab-item active">
+                <div class="tab-item active" onclick="setActiveTab(this, 'home-screen')">
                     <div class="tab-icon"><i class="fas fa-compass"></i></div>
                     <div>Discover</div>
                 </div>
-                <div class="tab-item" onclick="showScreen('explore-screen')">
+                <div class="tab-item" onclick="setActiveTab(this, 'explore-screen')">
                     <div class="tab-icon"><i class="fas fa-search"></i></div>
                     <div>Explore</div>
                 </div>
-                <div class="tab-item" onclick="showScreen('matches-screen')">
+                <div class="tab-item" onclick="setActiveTab(this, 'matches-screen')">
                     <div class="tab-icon"><i class="fas fa-heart"></i></div>
                     <div>Matches</div>
                 </div>
-                <div class="tab-item" onclick="showScreen('profile-screen')">
+                <div class="tab-item" onclick="setActiveTab(this, 'profile-screen')">
                     <div class="tab-icon"><i class="fas fa-user"></i></div>
                     <div>Profile</div>
                 </div>
@@ -1248,7 +1430,7 @@
             <div class="header">
                 <div class="nav-icon" onclick="showScreen('home-screen')"><i class="fas fa-arrow-left"></i></div>
                 <div class="logo">Your Matches</div>
-                <div class="nav-icon"><i class="fas fa-filter"></i></div>
+                <div class="nav-icon" onclick="showFilters()"><i class="fas fa-filter"></i></div>
             </div>
             
             <div class="content">
@@ -1307,19 +1489,19 @@
             </div>
             
             <div class="tab-bar">
-                <div class="tab-item" onclick="showScreen('home-screen')">
+                <div class="tab-item" onclick="setActiveTab(this, 'home-screen')">
                     <div class="tab-icon"><i class="fas fa-compass"></i></div>
                     <div>Discover</div>
                 </div>
-                <div class="tab-item" onclick="showScreen('explore-screen')">
+                <div class="tab-item" onclick="setActiveTab(this, 'explore-screen')">
                     <div class="tab-icon"><i class="fas fa-search"></i></div>
                     <div>Explore</div>
                 </div>
-                <div class="tab-item active">
+                <div class="tab-item active" onclick="setActiveTab(this, 'matches-screen')">
                     <div class="tab-icon"><i class="fas fa-heart"></i></div>
                     <div>Matches</div>
                 </div>
-                <div class="tab-item" onclick="showScreen('profile-screen')">
+                <div class="tab-item" onclick="setActiveTab(this, 'profile-screen')">
                     <div class="tab-icon"><i class="fas fa-user"></i></div>
                     <div>Profile</div>
                 </div>
@@ -1343,11 +1525,11 @@
                 
                 <!-- Search Filters -->
                 <div class="search-filter">
-                    <button class="filter-btn active" onclick="setFilter('all')">All</button>
-                    <button class="filter-btn" onclick="setFilter('nearby')">Nearby</button>
-                    <button class="filter-btn" onclick="setFilter('recent')">Recent</button>
-                    <button class="filter-btn" onclick="setFilter('popular')">Popular</button>
-                    <button class="filter-btn" onclick="setFilter('verified')">Verified</button>
+                    <button class="filter-btn active" onclick="setFilter(this, 'all')">All</button>
+                    <button class="filter-btn" onclick="setFilter(this, 'nearby')">Nearby</button>
+                    <button class="filter-btn" onclick="setFilter(this, 'recent')">Recent</button>
+                    <button class="filter-btn" onclick="setFilter(this, 'popular')">Popular</button>
+                    <button class="filter-btn" onclick="setFilter(this, 'verified')">Verified</button>
                 </div>
                 
                 <h2 class="onboarding-title">Find Your Match</h2>
@@ -1357,8 +1539,8 @@
                     <div class="profile-card" id="explore-profile-1">
                         <div class="profile-image-container">
                             <img src="https://media.licdn.com/dms/image/v2/D5603AQE6yjLFDfxE9g/profile-displayphoto-scale_400_400/B56ZkimhTRJ8Ag-/0/1757222149940?e=1759968000&v=beta&t=biQlFmC_AG66i8sdLAyksX8ZA5d3NPY9HPryWYWT-70" class="profile-image active" alt="Profile" data-index="0">
-                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&q=80" class="profile-image inactive" alt="Profile" data-index="1">
-                            <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&q=80" class="profile-image inactive" alt="Profile" data-index="2">
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&q=80" class="profile-image" alt="Profile" data-index="1">
+                            <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&q=80" class="profile-image" alt="Profile" data-index="2">
                             <div class="image-indicators">
                                 <div class="image-indicator active" data-index="0"></div>
                                 <div class="image-indicator" data-index="1"></div>
@@ -1399,8 +1581,8 @@
                     <div class="profile-card" id="explore-profile-2">
                         <div class="profile-image-container">
                             <img src="https://static.vecteezy.com/system/resources/previews/042/332/098/non_2x/default-avatar-profile-icon-grey-photo-placeholder-female-no-photo-images-for-unfilled-user-profile-greyscale-illustration-for-socail-media-web-vector.jpg" class="profile-image active" alt="Profile" data-index="0">
-                            <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&q=80" class="profile-image inactive" alt="Profile" data-index="1">
-                            <img src="https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&q=80" class="profile-image inactive" alt="Profile" data-index="2">
+                            <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&q=80" class="profile-image" alt="Profile" data-index="1">
+                            <img src="https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&q=80" class="profile-image" alt="Profile" data-index="2">
                             <div class="image-indicators">
                                 <div class="image-indicator active" data-index="0"></div>
                                 <div class="image-indicator" data-index="1"></div>
@@ -1441,19 +1623,19 @@
             </div>
             
             <div class="tab-bar">
-                <div class="tab-item" onclick="showScreen('home-screen')">
+                <div class="tab-item" onclick="setActiveTab(this, 'home-screen')">
                     <div class="tab-icon"><i class="fas fa-compass"></i></div>
                     <div>Discover</div>
                 </div>
-                <div class="tab-item active">
+                <div class="tab-item active" onclick="setActiveTab(this, 'explore-screen')">
                     <div class="tab-icon"><i class="fas fa-search"></i></div>
                     <div>Explore</div>
                 </div>
-                <div class="tab-item" onclick="showScreen('matches-screen')">
+                <div class="tab-item" onclick="setActiveTab(this, 'matches-screen')">
                     <div class="tab-icon"><i class="fas fa-heart"></i></div>
                     <div>Matches</div>
                 </div>
-                <div class="tab-item" onclick="showScreen('profile-screen')">
+                <div class="tab-item" onclick="setActiveTab(this, 'profile-screen')">
                     <div class="tab-icon"><i class="fas fa-user"></i></div>
                     <div>Profile</div>
                 </div>
@@ -1529,19 +1711,19 @@
             </div>
             
             <div class="tab-bar">
-                <div class="tab-item" onclick="showScreen('home-screen')">
+                <div class="tab-item" onclick="setActiveTab(this, 'home-screen')">
                     <div class="tab-icon"><i class="fas fa-compass"></i></div>
                     <div>Discover</div>
                 </div>
-                <div class="tab-item" onclick="showScreen('explore-screen')">
+                <div class="tab-item" onclick="setActiveTab(this, 'explore-screen')">
                     <div class="tab-icon"><i class="fas fa-search"></i></div>
                     <div>Explore</div>
                 </div>
-                <div class="tab-item" onclick="showScreen('matches-screen')">
+                <div class="tab-item" onclick="setActiveTab(this, 'matches-screen')">
                     <div class="tab-icon"><i class="fas fa-heart"></i></div>
                     <div>Matches</div>
                 </div>
-                <div class="tab-item active">
+                <div class="tab-item active" onclick="setActiveTab(this, 'profile-screen')">
                     <div class="tab-icon"><i class="fas fa-user"></i></div>
                     <div>Profile</div>
                 </div>
@@ -1600,17 +1782,17 @@
                 <div class="form-group">
                     <label class="form-label">Account</label>
                     <div style="background: #f8f9fa; padding: 15px; border-radius: 16px;">
-                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; cursor: pointer;" onclick="showScreen('edit-profile-screen')">
+                        <div class="menu-item" onclick="showScreen('edit-profile-screen')">
                             <div>Edit Profile</div>
-                            <i class="fas fa-chevron-right" style="color: var(--gray);"></i>
+                            <i class="fas fa-chevron-right"></i>
                         </div>
-                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; cursor: pointer;" onclick="showScreen('privacy-screen')">
+                        <div class="menu-item" onclick="showScreen('privacy-screen')">
                             <div>Privacy & Security</div>
-                            <i class="fas fa-chevron-right" style="color: var(--gray);"></i>
+                            <i class="fas fa-chevron-right"></i>
                         </div>
-                        <div style="display: flex; justify-content: space-between; align-items: center; cursor: pointer;" onclick="showScreen('connected-accounts-screen')">
+                        <div class="menu-item" onclick="showScreen('connected-accounts-screen')">
                             <div>Connected Accounts</div>
-                            <i class="fas fa-chevron-right" style="color: var(--gray);"></i>
+                            <i class="fas fa-chevron-right"></i>
                         </div>
                     </div>
                 </div>
@@ -1645,17 +1827,17 @@
                 <div class="form-group">
                     <label class="form-label">Support</label>
                     <div style="background: #f8f9fa; padding: 15px; border-radius: 16px;">
-                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; cursor: pointer;" onclick="showHelp('general')">
+                        <div class="menu-item" onclick="showHelp('general')">
                             <div>Get Help</div>
-                            <i class="fas fa-chevron-right" style="color: var(--gray);"></i>
+                            <i class="fas fa-chevron-right"></i>
                         </div>
-                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; cursor: pointer;" onclick="reportProblem()">
+                        <div class="menu-item" onclick="reportProblem()">
                             <div>Report a Problem</div>
-                            <i class="fas fa-chevron-right" style="color: var(--gray);"></i>
+                            <i class="fas fa-chevron-right"></i>
                         </div>
-                        <div style="display: flex; justify-content: space-between; align-items: center; cursor: pointer;" onclick="showScreen('blocked-users-screen')">
+                        <div class="menu-item" onclick="showScreen('blocked-users-screen')">
                             <div>Blocked Users</div>
-                            <i class="fas fa-chevron-right" style="color: var(--gray);"></i>
+                            <i class="fas fa-chevron-right"></i>
                         </div>
                     </div>
                 </div>
@@ -1666,6 +1848,154 @@
                 
                 <div class="form-group">
                     <button class="btn btn-outline" onclick="logout()">Log Out</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Edit Profile Screen -->
+        <div class="screen" id="edit-profile-screen">
+            <div class="header">
+                <div class="nav-icon" onclick="showScreen('settings-screen')"><i class="fas fa-arrow-left"></i></div>
+                <div class="logo">Edit Profile</div>
+                <div class="nav-icon" onclick="showToast('Profile updated successfully!')"><i class="fas fa-check"></i></div>
+            </div>
+            
+            <div class="content">
+                <div class="avatar-upload">
+                    <img src="https://media.licdn.com/dms/image/v2/D5603AQE6yjLFDfxE9g/profile-displayphoto-scale_400_400/B56ZkimhTRJ8Ag-/0/1757222149940?e=1759968000&v=beta&t=biQlFmC_AG66i8sdLAyksX8ZA5d3NPY9HPryWYWT-70" class="avatar-preview" alt="Profile">
+                    <div class="avatar-upload-btn">Change Photo</div>
+                </div>
+                
+                <div class="edit-profile-form">
+                    <div class="form-group">
+                        <label class="form-label">Name</label>
+                        <input type="text" class="form-input" value="Sai Prasad">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Age</label>
+                        <input type="number" class="form-input" value="20">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Bio</label>
+                        <textarea class="form-input" rows="4">I'm an art student passionate about painting and photography. Love visiting galleries, indie music concerts, and exploring cute coffee shops.</textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Interests</label>
+                        <input type="text" class="form-input" value="Painting, Photography, Coffee, Indie Music">
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <button class="btn btn-primary" onclick="showToast('Profile updated successfully!'); showScreen('profile-screen');">Save Changes</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Privacy Screen -->
+        <div class="screen" id="privacy-screen">
+            <div class="header">
+                <div class="nav-icon" onclick="showScreen('settings-screen')"><i class="fas fa-arrow-left"></i></div>
+                <div class="logo">Privacy & Security</div>
+                <div class="nav-icon" onclick="showToast('Privacy settings saved!')"><i class="fas fa-check"></i></div>
+            </div>
+            
+            <div class="content">
+                <div style="background: #f8f9fa; padding: 15px; border-radius: 16px; margin-bottom: 20px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                        <div>
+                            <div class="form-label">Private Account</div>
+                            <p class="microcopy">Only matches can see your profile</p>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="privacy-private-toggle">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                        <div>
+                            <div class="form-label">Show Distance</div>
+                            <p class="microcopy">Allow others to see your approximate distance</p>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="privacy-distance-toggle" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <div>
+                            <div class="form-label">Show Activity Status</div>
+                            <p class="microcopy">Show when you were last active</p>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="privacy-activity-toggle" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <button class="btn btn-primary" onclick="showToast('Privacy settings saved!'); showScreen('settings-screen');">Save Changes</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Connected Accounts Screen -->
+        <div class="screen" id="connected-accounts-screen">
+            <div class="header">
+                <div class="nav-icon" onclick="showScreen('settings-screen')"><i class="fas fa-arrow-left"></i></div>
+                <div class="logo">Connected Accounts</div>
+                <div class="nav-icon"><i class="fas fa-check"></i></div>
+            </div>
+            
+            <div class="content">
+                <div style="background: #f8f9fa; padding: 15px; border-radius: 16px; margin-bottom: 20px;">
+                    <div class="menu-item">
+                        <div style="display: flex; align-items: center;">
+                            <i class="fab fa-google" style="color: #DB4437; margin-right: 10px;"></i>
+                            <div>Google</div>
+                        </div>
+                        <div style="color: var(--success);">Connected</div>
+                    </div>
+                    
+                    <div class="menu-item">
+                        <div style="display: flex; align-items: center;">
+                            <i class="fab fa-apple" style="color: #000; margin-right: 10px;"></i>
+                            <div>Apple</div>
+                        </div>
+                        <div style="color: var(--gray);">Not Connected</div>
+                    </div>
+                    
+                    <div class="menu-item">
+                        <div style="display: flex; align-items: center;">
+                            <i class="fab fa-instagram" style="color: #E4405F; margin-right: 10px;"></i>
+                            <div>Instagram</div>
+                        </div>
+                        <div style="color: var(--success);">Connected</div>
+                    </div>
+                </div>
+                
+                <p class="microcopy">Connecting accounts helps us verify your identity and improve your matches</p>
+            </div>
+        </div>
+        
+        <!-- Blocked Users Screen -->
+        <div class="screen" id="blocked-users-screen">
+            <div class="header">
+                <div class="nav-icon" onclick="showScreen('settings-screen')"><i class="fas fa-arrow-left"></i></div>
+                <div class="logo">Blocked Users</div>
+                <div class="nav-icon"><i class="fas fa-user-slash"></i></div>
+            </div>
+            
+            <div class="content">
+                <div style="text-align: center; padding: 40px 20px;">
+                    <i class="fas fa-user-slash" style="font-size: 60px; color: var(--gray); margin-bottom: 20px;"></i>
+                    <h2 class="onboarding-title">No Blocked Users</h2>
+                    <p class="onboarding-subtitle">Users you block will appear here</p>
                 </div>
             </div>
         </div>
@@ -1698,6 +2028,19 @@
         let currentChatUser = null;
         let chatOpen = false;
         
+        // Debounce function to limit how often a function can be called
+        function debounce(func, wait) {
+            let timeout;
+            return function executedFunction(...args) {
+                const later = () => {
+                    clearTimeout(timeout);
+                    func(...args);
+                };
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+            };
+        }
+        
         function showScreen(screenId) {
             // Hide all screens
             document.querySelectorAll('.screen').forEach(screen => {
@@ -1705,12 +2048,32 @@
             });
             
             // Show the requested screen
-            document.getElementById(screenId).classList.add('active');
+            const targetScreen = document.getElementById(screenId);
+            if (targetScreen) {
+                targetScreen.classList.add('active');
+            } else {
+                // Fallback to home screen if screen doesn't exist
+                document.getElementById('home-screen').classList.add('active');
+                showToast('Screen not available yet');
+            }
             
             // Close chat if open when switching screens
             if (chatOpen) {
                 toggleChat();
             }
+        }
+        
+        function setActiveTab(tabElement, screenId) {
+            // Remove active class from all tab items
+            document.querySelectorAll('.tab-item').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Add active class to clicked tab
+            tabElement.classList.add('active');
+            
+            // Show the corresponding screen
+            showScreen(screenId);
         }
         
         function validateLogin() {
@@ -1722,15 +2085,32 @@
                 return;
             }
             
-            showScreen('preferences-screen');
+            // Show loading state
+            const btn = event.target;
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '<span class="spinner"></span>';
+            btn.disabled = true;
+            
+            // Simulate login process
+            setTimeout(() => {
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+                showScreen('preferences-screen');
+            }, 1000);
         }
         
         function socialLogin(provider) {
+            // Show loading state
+            const btn = event.target;
+            const originalHTML = btn.innerHTML;
+            btn.innerHTML = '<span class="spinner"></span>';
+            
             showToast(`Logging in with ${provider}`);
             // Simulate login process
             setTimeout(() => {
+                btn.innerHTML = originalHTML;
                 showScreen('preferences-screen');
-            }, 1000);
+            }, 1500);
         }
         
         function savePreferences() {
@@ -1740,8 +2120,18 @@
             const notifications = document.getElementById('notifications-toggle').checked;
             const privateAccount = document.getElementById('private-toggle').checked;
             
-            showToast('Preferences saved!');
-            showScreen('home-screen');
+            // Show loading state
+            const btn = event.target;
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '<span class="spinner"></span>';
+            btn.disabled = true;
+            
+            setTimeout(() => {
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+                showToast('Preferences saved!');
+                showScreen('home-screen');
+            }, 1000);
         }
         
         function showHelp(topic) {
@@ -1752,14 +2142,14 @@
             showToast('Advanced filters would be shown here');
         }
         
-        function setSelectionOption(option) {
+        function setSelectionOption(optionElement, option) {
             // Remove active class from all options
             document.querySelectorAll('.selection-option').forEach(opt => {
                 opt.classList.remove('active');
             });
             
             // Add active class to clicked option
-            event.target.classList.add('active');
+            optionElement.classList.add('active');
             
             // In a real app, this would filter the profiles based on the selected option
             showToast(`Showing ${option}`);
@@ -1787,11 +2177,9 @@
             // Update images
             images.forEach((img, index) => {
                 if (index === currentIndex) {
-                    img.classList.remove('inactive');
                     img.classList.add('active');
                 } else {
                     img.classList.remove('active');
-                    img.classList.add('inactive');
                 }
             });
             
@@ -1810,9 +2198,7 @@
         
         function swipeCard(direction, profileId = 'current-profile') {
             const card = document.getElementById(profileId);
-            
-            // Change photo before swipe animation
-            changeProfileImage(profileId, 'next');
+            if (!card) return;
             
             if (direction === 'right') {
                 card.classList.add('swipe-right');
@@ -1838,6 +2224,9 @@
                 card.style.transform = 'translateX(0) rotate(0)';
                 card.style.opacity = '1';
                 card.classList.remove('swipe-right', 'swipe-left');
+                
+                // Change photo after swipe
+                changeProfileImage(profileId, 'next');
             }, 500);
         }
         
@@ -1865,6 +2254,10 @@
             if (chatOpen) {
                 chatButton.classList.add('active');
                 chatWindow.classList.add('active');
+                // Focus on input when chat opens
+                setTimeout(() => {
+                    document.getElementById('message-input').focus();
+                }, 300);
             } else {
                 chatButton.classList.remove('active');
                 chatWindow.classList.remove('active');
@@ -1918,6 +2311,12 @@
             setTimeout(() => {
                 simulateReply();
             }, 1000);
+        }
+        
+        function handleMessageKeypress(e) {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
         }
         
         function simulateReply() {
@@ -1978,7 +2377,8 @@
             showScreen('profile-screen');
         }
         
-        function filterProfiles() {
+        // Debounced filter function to improve performance
+        const filterProfiles = debounce(function() {
             const input = document.getElementById('search-input');
             const filter = input.value.toUpperCase();
             const profiles = document.querySelectorAll('.profile-card');
@@ -1996,16 +2396,16 @@
                     profile.style.display = 'none';
                 }
             });
-        }
+        }, 300);
         
-        function setFilter(filterType) {
+        function setFilter(buttonElement, filterType) {
             // Remove active class from all filter buttons
             document.querySelectorAll('.filter-btn').forEach(btn => {
                 btn.classList.remove('active');
             });
             
             // Add active class to clicked button
-            event.target.classList.add('active');
+            buttonElement.classList.add('active');
             
             // In a real app, this would filter the profiles based on the selected filter
             showToast(`Filtering by ${filterType}`);
@@ -2083,6 +2483,8 @@
             if (e.target.classList.contains('image-indicator')) {
                 const indicator = e.target;
                 const profile = indicator.closest('.profile-card');
+                if (!profile) return;
+                
                 const profileId = profile.id;
                 const index = parseInt(indicator.getAttribute('data-index'));
                 
@@ -2092,11 +2494,9 @@
                 // Update images
                 images.forEach((img, imgIndex) => {
                     if (imgIndex === index) {
-                        img.classList.remove('inactive');
                         img.classList.add('active');
                     } else {
                         img.classList.remove('active');
-                        img.classList.add('inactive');
                     }
                 });
                 
@@ -2112,6 +2512,16 @@
                 // Save current index
                 profileImages[profileId] = index;
             }
+        });
+        
+        // Preload images for better performance
+        window.addEventListener('load', function() {
+            const images = document.querySelectorAll('img');
+            images.forEach(img => {
+                // Create a new image to force preloading
+                const preloadImage = new Image();
+                preloadImage.src = img.src;
+            });
         });
     </script>
 </body>
